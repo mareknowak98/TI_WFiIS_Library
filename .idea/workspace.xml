@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85743823-ce27-4d8e-a6e5-49e30257cb83" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/babel.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HelloWorld.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/AuthAppApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/AuthAppApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/config/WebMvcConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/config/WebMvcConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/controller/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/controller/GlobalExceptionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/ErrorResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/ErrorResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/JwtAuthenticationResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/JwtAuthenticationResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/LoginRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/SignUpRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/SignUpRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/UserSummary$UserSummaryBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/UserSummary$UserSummaryBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/UserSummary.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/dto/UserSummary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/exception/AppException.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/exception/AppException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/exception/BadRequestException.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/exception/BadRequestException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/exception/ConflictException.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/exception/ConflictException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/exception/NotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/exception/NotFoundException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/model/RoleName.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/model/RoleName.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/repository/RoleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/repository/RoleRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/repository/UserRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/CustomUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/CustomUserDetailsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/JwtAuthenticationEntryPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/JwtAuthenticationEntryPoint.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/JwtAuthenticationFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/JwtTokenProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/JwtTokenProvider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/UserPrincipal.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/security/UserPrincipal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/service/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/service/AuthService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/zti_proj_v2/spring-security-jwt/target/classes/pl/rmitula/authapp/service/UserService.class" afterDir="false" />
-    </list>
+    <list default="true" id="85743823-ce27-4d8e-a6e5-49e30257cb83" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
