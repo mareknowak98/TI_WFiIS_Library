@@ -1,4 +1,4 @@
-package pl.rmitula.authapp;
+package pl.zti.library;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
