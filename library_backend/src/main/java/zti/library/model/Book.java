@@ -1,5 +1,6 @@
 package zti.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import zti.library.dto.BookDto;
 
@@ -15,8 +16,9 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "author_id")
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "booksWritten", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Author> authors = new ArrayList<>();
 
     public static Book from(BookDto bookDto){

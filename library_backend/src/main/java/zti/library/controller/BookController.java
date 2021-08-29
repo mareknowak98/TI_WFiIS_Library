@@ -1,24 +1,31 @@
 package zti.library.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import zti.library.dto.AuthorDto;
 import zti.library.dto.BookDto;
+import zti.library.model.Author;
 import zti.library.model.Book;
 import zti.library.service.BookService;
+import zti.library.service.AuthorService;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/books")
+@Slf4j
 public class BookController {
     private final BookService bookService;
-
+    private final AuthorService authorService;
     @Autowired
-    public BookController(BookService bookService){
+    public BookController(BookService bookService, AuthorService authorService){
+        this.authorService = authorService;
         this.bookService = bookService;
     }
 
@@ -54,16 +61,26 @@ public class BookController {
         return new ResponseEntity<>(BookDto.from(editedBook), HttpStatus.OK);
     }
 
-    @PostMapping(value = "{bookId}/authors/{id}/add")
+    @PostMapping(value = "{bookId}/authors/{authorId}/add")
     public ResponseEntity<BookDto> addAuthorToBook(@PathVariable final Long bookId, @PathVariable final Long authorId){
+        log.info("getin");
         Book book = bookService.addAuthorToBook(bookId, authorId);
         return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "{bookId}/authors/{id}/remove")
+    @DeleteMapping(value = "{bookId}/authors/{authorId}/remove")
     public ResponseEntity<BookDto> removeAuthorFromBook(@PathVariable final Long bookId, @PathVariable final Long authorId){
         Book book = bookService.removeAuthorFromBook(bookId, authorId);
         return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
     }
+
+//    @PostMapping(value = "addBookWithAuthor")
+//    public ResponseEntity<BookDto> addBookWithAuthor(@RequestBody final BookDto bookDto, final String authorName){
+//        Book book = bookService.addBook(Book.from(bookDto));
+//        Long bookId = book.getId();
+//        Author author = authorService.addAuthor(new Author(authorName));
+//        book.addAuthor(author);
+//        return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
+//    }
 
 }

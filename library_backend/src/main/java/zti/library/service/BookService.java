@@ -41,7 +41,7 @@ public class BookService {
         return book;
     }
 
-    @Transactional
+//    @Transactional
     public Book editBook(Long id, Book book){
         Book bookToEdit = getBook(id);
         bookToEdit.setName(book.getName());
@@ -52,11 +52,12 @@ public class BookService {
     public Book addAuthorToBook(Long bookId, Long authorId){
         Book book = getBook(bookId);
         Author author = authorService.getAuthor(authorId);
-        book.addAuthor(author);
+        author.addAuthorToBook(book);
+//        book.addAuthor(author);
         return book;
     }
 
-    @Transactional
+//    @Transactional
     public Book removeAuthorFromBook(Long bookId, Long authorId){
         Book book = getBook(bookId);
         Author author = authorService.getAuthor(authorId);
