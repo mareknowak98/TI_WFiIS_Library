@@ -28,34 +28,41 @@ public class DatabaseLoader implements ApplicationRunner {
     private final UserRepository users;
     private final RoleRepository roles;
     private PasswordEncoder passwordEncoder;
+    private final AuthorRepository authors;
 
     @Autowired
-    public DatabaseLoader(UserRepository users, RoleRepository roles, PasswordEncoder passwordEncoder) {
+    public DatabaseLoader(UserRepository users, RoleRepository roles, PasswordEncoder passwordEncoder, AuthorRepository authors) {
         this.users = users;
         this.roles = roles;
         this.passwordEncoder= passwordEncoder;
+        this.authors = authors;
     }
 
-////    @Override
-//    public void run(String... strings) throws Exception {
-//
-//    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        //Admin mock
         User user = new User("admin", "admin@gmail.com", "password");
-//        roles.save(new Role(new Long(1), RoleName.ROLE_ADMIN));
         user.setPassword(passwordEncoder.encode("password"));
-
-
         Role userRole = roles.findByName(RoleName.ROLE_ADMIN)
                 .orElseThrow(() -> new AppException("User Role not set. Add default roles to database."));
 
         user.setRoles(Collections.singleton(userRole));
-
         log.info("Successfully registered admin with [email: {}]", user.getEmail());
-
         users.save(user);
+
+        //Authors mocks
+        Author rowling = this.authors.save(new Author("J. K. Rowling"));
+        Author tolkien = this.authors.save(new Author("J.R.R. Tolkien"));
+        Author sparks = this.authors.save(new Author("Nicholas Sparks"));
+        Author collins = this.authors.save(new Author("Suzanne Collins"));
+        Author king = this.authors.save(new Author("Stephen King"));
+        log.info("Successfully registered author with [author: {}]", rowling.getAuthor());
+        log.info("Successfully registered author with [author: {}]", tolkien.getAuthor());
+        log.info("Successfully registered author with [author: {}]", sparks.getAuthor());
+        log.info("Successfully registered author with [author: {}]", collins.getAuthor());
+        log.info("Successfully registered author with [author: {}]", king.getAuthor());
+
     }
 }

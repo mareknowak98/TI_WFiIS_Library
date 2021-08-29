@@ -30,7 +30,7 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BookDto>> getBooks(@RequestBody final BookDto bookDto){
+    public ResponseEntity<List<BookDto>> getBooks(){
         List<Book> books = bookService.getBooks();
         List<BookDto> booksDto = books.stream().map(BookDto::from).collect(Collectors.toList()); //:: is 'range operator'
         return new ResponseEntity<>(booksDto, HttpStatus.OK);
@@ -52,6 +52,18 @@ public class BookController {
     public ResponseEntity<BookDto> editBook(@PathVariable final Long id, @RequestBody final BookDto bookDto){
         Book editedBook = bookService.editBook(id, Book.from(bookDto));
         return new ResponseEntity<>(BookDto.from(editedBook), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "{bookId}/authors/{id}/add")
+    public ResponseEntity<BookDto> addAuthorToBook(@PathVariable final Long bookId, @PathVariable final Long authorId){
+        Book book = bookService.addAuthorToBook(bookId, authorId);
+        return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "{bookId}/authors/{id}/remove")
+    public ResponseEntity<BookDto> removeAuthorFromBook(@PathVariable final Long bookId, @PathVariable final Long authorId){
+        Book book = bookService.removeAuthorFromBook(bookId, authorId);
+        return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
     }
 
 }

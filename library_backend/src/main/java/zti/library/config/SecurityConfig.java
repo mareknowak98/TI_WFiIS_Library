@@ -31,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/v2/api-docs",
             "/webjars/**",
             "/h2/**",
-            "/books/**"
+            "/books/**",
+            "/authors/**"
     };
 
     private CustomUserDetailsService customUserDetailsService;
@@ -105,6 +106,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/yourEndpoint")
 //                .permitAll()
                 .antMatchers("/api/books/**")
+                .permitAll()
+                .antMatchers("/api/authors/**")
                 .permitAll()
                 .antMatchers(AUTH_WHITELIST)
                 .permitAll()

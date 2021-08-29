@@ -1,6 +1,7 @@
 package zti.library.service;
 
 import zti.library.exception.BookNotFoundException;
+import zti.library.model.Author;
 import zti.library.model.Book;
 import zti.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,11 @@ import javax.transaction.Transactional;
 @Service
 public class BookService {
     private final BookRepository bookRepository;
-
+    private final AuthorService authorService;
     @Autowired
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, AuthorService authorService) {
         this.bookRepository = bookRepository;
+        this.authorService = authorService;
     }
 
     public Book addBook(Book book){
@@ -42,8 +44,23 @@ public class BookService {
     @Transactional
     public Book editBook(Long id, Book book){
         Book bookToEdit = getBook(id);
-//        bookToEdit.setSerialNumber(book.getSerialNumber());
         bookToEdit.setName(book.getName());
         return bookToEdit;
+    }
+
+    @Transactional
+    public Book addAuthorToBook(Long bookId, Long authorId){
+        Book book = getBook(bookId);
+        Author author = authorService.getAuthor(authorId);
+        book.addAuthor(author);
+        return book;
+    }
+
+    @Transactional
+    public Book removeAuthorFromBook(Long bookId, Long authorId){
+        Book book = getBook(bookId);
+        Author author = authorService.getAuthor(authorId);
+        book.removeAuthor(author);
+        return book;
     }
 }
