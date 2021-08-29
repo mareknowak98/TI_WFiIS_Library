@@ -82,4 +82,23 @@ public class AuthService {
 
         return userRepository.save(user).getId();
         }
+    public Long registerAdmin(SignUpRequest signUpRequest) {
+
+        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new ConflictException("Email [email: " + signUpRequest.getEmail() + "] is already taken");
+        }
+
+        User user = new User(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword());
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        Role userRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+                .orElseThrow(() -> new AppException("User Role not set. Add default roles to database."));
+
+        user.setRoles(Collections.singleton(userRole));
+
+        log.info("Successfully registered admin with [email: {}]", user.getEmail());
+
+        return userRepository.save(user).getId();
+    }
 }
