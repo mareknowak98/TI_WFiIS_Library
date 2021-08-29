@@ -3,6 +3,7 @@ package zti.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import zti.library.dto.BookDto;
 import zti.library.model.Book;
@@ -22,6 +23,7 @@ public class BookController {
     }
 
     @PostMapping
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<BookDto> addBook(@RequestBody final BookDto bookDto){
         Book book = bookService.addBook(Book.from(bookDto));
         return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);

@@ -42,7 +42,8 @@ public class BookService {
     @Transactional
     public Book editBook(Long id, Book book){
         Book bookToEdit = getBook(id);
-        bookToEdit.setSerialNumber(book.getSerialNumber());
+//        bookToEdit.setSerialNumber(book.getSerialNumber());
+        bookToEdit.setName(book.getName());
         return bookToEdit;
     }
 }

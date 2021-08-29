@@ -5,6 +5,7 @@ import axios from "axios";
 import VueRouter from 'vue-router';
 import Home from './components/Home.vue';
 import Register from './components/Register.vue';
+import addBook from './components/AddBook.vue'
 
 Vue.config.productionTip = false
 
@@ -24,6 +25,11 @@ const routes = [{
         path: "/register",
         name: "register",
         component: Register
+    },
+    {
+        path: "/addBook",
+        name: "addBook",
+        component: addBook
     },
     {
         path: '/*',

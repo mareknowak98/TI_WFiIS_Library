@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/v2/api-docs",
             "/webjars/**",
             "/h2/**",
-            "/books"
+            "/books/**"
     };
 
     private CustomUserDetailsService customUserDetailsService;
