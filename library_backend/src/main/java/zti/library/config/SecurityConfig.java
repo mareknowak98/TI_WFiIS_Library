@@ -30,7 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui.html",
             "/v2/api-docs",
             "/webjars/**",
-            "/h2/**"
+            "/h2/**",
+            "/books/**",
+            "/authors/**"
     };
 
     private CustomUserDetailsService customUserDetailsService;
@@ -103,6 +105,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
 //                .antMatchers("/api/yourEndpoint")
 //                .permitAll()
+                .antMatchers("/api/books/**")
+                .permitAll()
+                .antMatchers("/api/authors/**")
+                .permitAll()
                 .antMatchers(AUTH_WHITELIST)
                 .permitAll()
                 .anyRequest()
