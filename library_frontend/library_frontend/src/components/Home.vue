@@ -2,7 +2,8 @@
   <div class="container">
     <navbar></navbar>
     <b-jumbotron class="jumbotron jumbotron-home">
-      
+      <h2>Books</h2>
+      {{books}}
        <Footer></Footer>
 
      </b-jumbotron>
@@ -14,7 +15,7 @@
 <script>
 import Navbar from '../components/Navbar.vue';
 import Footer from '../components/Footer.vue';
-// import axios from 'axios';
+import axios from 'axios';
 export default {
   name: "Home",
   components: {
@@ -23,18 +24,31 @@ export default {
   },
   data() {
     return {
+      books: {},
       form: {
 
       },
     }
   },
-  mounted: function () {
+  mounted() {
+    this.getBooks();
   },
 
 
 
   methods:{
-
+    getBooks(){
+      let config = {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+        axios.get('http://localhost:5000/books', config)
+        .then(res => (this.books = res.data))
+        .catch(err => {
+        console.log(err);
+        })
+    }
   }
 };
 </script>
