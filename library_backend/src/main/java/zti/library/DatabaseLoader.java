@@ -29,13 +29,15 @@ public class DatabaseLoader implements ApplicationRunner {
     private final RoleRepository roles;
     private PasswordEncoder passwordEncoder;
     private final AuthorRepository authors;
+    private final BookRepository books;
 
     @Autowired
-    public DatabaseLoader(UserRepository users, RoleRepository roles, PasswordEncoder passwordEncoder, AuthorRepository authors) {
+    public DatabaseLoader(UserRepository users, RoleRepository roles, PasswordEncoder passwordEncoder, AuthorRepository authors, BookRepository books) {
         this.users = users;
         this.roles = roles;
         this.passwordEncoder= passwordEncoder;
         this.authors = authors;
+        this.books = books;
     }
 
 
@@ -63,6 +65,20 @@ public class DatabaseLoader implements ApplicationRunner {
         log.info("Successfully registered author with [author: {}]", sparks.getAuthor());
         log.info("Successfully registered author with [author: {}]", collins.getAuthor());
         log.info("Successfully registered author with [author: {}]", king.getAuthor());
+
+//        //Books mocks
+//        Book hp1 = new Book("Harry Potter and the Philosophers Stone");
+//        this.books.save(hp1);
+//        hp1.addAuthorToBook(rowling);
+////        rowling.addAuthorToBook(hp1);
+//
+//        Book hobbit = new Book("The Hobbit");
+//        this.books.save(hobbit);
+//        hobbit.addAuthor(tolkien);
+//
+////        tolkien.addAuthorToBook(hobbit);
+
+        //
 
     }
 }

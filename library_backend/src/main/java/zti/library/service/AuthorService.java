@@ -21,8 +21,8 @@ public class AuthorService {
         this.authorRepository = authorRepository;
     }
 
-    public Author addAuthor(Author book){
-        return authorRepository.save(book);
+    public Author addAuthor(Author author){
+        return authorRepository.save(author);
     }
 
     public List<Author> getAuthors(){

@@ -7,6 +7,7 @@ import zti.library.dto.BookDto;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -21,6 +22,15 @@ public class Book {
     @ManyToMany(mappedBy = "booksWritten", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Author> authors = new ArrayList<>();
 
+    @OneToMany(mappedBy="book",	cascade= {CascadeType.REMOVE}, orphanRemoval = true) //Cart
+    private List<Borrowed> borrowed;
+
+    public Book(String name){
+        this.name = name;
+    }
+
+    public Book(){}
+
     public static Book from(BookDto bookDto){
         Book book = new Book();
         book.setName(bookDto.getName());
@@ -34,6 +44,10 @@ public class Book {
 
     public void removeAuthor(Author author){
         this.authors.remove(author);
+    }
+
+    public void addBorrowed(Borrowed borrowed){
+        this.borrowed.add(borrowed);
     }
 
 }
