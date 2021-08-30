@@ -1,4 +1,4 @@
-package pl.zti.library;
+package zti.library;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
