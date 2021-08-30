@@ -29,13 +29,15 @@ public class DatabaseLoader implements ApplicationRunner {
     private final RoleRepository roles;
     private PasswordEncoder passwordEncoder;
     private final AuthorRepository authors;
+    private final CategoryRepository categories;
 
     @Autowired
-    public DatabaseLoader(UserRepository users, RoleRepository roles, PasswordEncoder passwordEncoder, AuthorRepository authors) {
+    public DatabaseLoader(UserRepository users, RoleRepository roles, PasswordEncoder passwordEncoder, AuthorRepository authors, CategoryRepository categories) {
         this.users = users;
         this.roles = roles;
         this.passwordEncoder= passwordEncoder;
         this.authors = authors;
+        this.categories = categories;
     }
 
 
@@ -75,5 +77,17 @@ public class DatabaseLoader implements ApplicationRunner {
         log.info("Successfully registered author with [author: {}]", collins.getAuthor());
         log.info("Successfully registered author with [author: {}]", king.getAuthor());
 
+        //Category mocks
+        Category fantasy = this.categories.save(new Category("Fantasy"));
+        Category adventure = this.categories.save(new Category("Adventure"));
+        Category romance = this.categories.save(new Category("Romance"));
+        Category thriller = this.categories.save(new Category("Thriller"));
+        Category science = this.categories.save(new Category("Science"));
+        log.info("Successfully registered category with [category: {}]", fantasy.getCategory());
+        log.info("Successfully registered category with [category: {}]", adventure.getCategory());
+        log.info("Successfully registered category with [category: {}]", romance.getCategory());
+        log.info("Successfully registered category with [category: {}]", thriller.getCategory());
+        log.info("Successfully registered category with [category: {}]", science.getCategory());
+        log.info("-------SUCCESSFULLY ADDED ITEMS FROM DATABASE LOADER--------");
     }
 }

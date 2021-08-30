@@ -36,7 +36,7 @@ public class Author {
         this.author = author;
     }
 
-    public void addAuthorToBook(Book book){
-        booksWritten.add(book);
-    }
+    public void addAuthorToBook(Book book){ booksWritten.add(book); }
+    public void removeAuthorFromBook(Book book){ booksWritten.remove(book); }
+
 }
