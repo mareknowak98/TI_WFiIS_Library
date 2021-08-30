@@ -15,6 +15,7 @@ import zti.library.model.User;
 import zti.library.repository.BorrowedRepository;
 import zti.library.security.CurrentUser;
 import zti.library.security.UserPrincipal;
+import zti.library.service.BookService;
 import zti.library.service.BorrowedService;
 import zti.library.service.UserService;
 
@@ -27,12 +28,14 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private UserService userService;
+    private BookService bookService;
     private BorrowedService borrowedService;
 
     @Autowired
-    public UserController(UserService userService, BorrowedService borrowedService) {
+    public UserController(UserService userService, BookService bookService, BorrowedService borrowedService) {
         this.borrowedService = borrowedService;
         this.userService = userService;
+        this.bookService = bookService;
     }
 
     @GetMapping("all") //TODO delete it
@@ -59,10 +62,11 @@ public class UserController {
         return new ResponseEntity<>(BorrowedDto.from(borrowed), HttpStatus.OK);
     }
 
-    @PostMapping("addBorrowedToUser/{userId}/add")
-    public ResponseEntity<BorrowedDto> addBorrowedToUser(@PathVariable final Long userId, @RequestBody final BorrowedDto borrowedDto){
+    @PostMapping("addBorrowedToUser/{userId}/{bookId}/add")
+    public ResponseEntity<BorrowedDto> addBorrowedToUser(@PathVariable final Long userId, @PathVariable final Long bookId, @RequestBody final BorrowedDto borrowedDto){
         Borrowed borrowed = borrowedService.addBorrowed(Borrowed.from(borrowedDto));
         userService.addBorrowedToUser(userId, borrowed.getId());
+        bookService.addBorrowedToBook(bookId, borrowed.getId());
         return new ResponseEntity<>(BorrowedDto.from(borrowed), HttpStatus.OK);
     }
 

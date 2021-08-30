@@ -21,9 +21,9 @@ public class Book {
     @ManyToMany(mappedBy = "booksWritten", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Author> authors = new ArrayList<>();
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "borrowed_id")
-//    private List<Borrowed> borrowed; //Cart
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "borrowed_book_id")
+    private List<Borrowed> borrowed; //Cart
 
     public static Book from(BookDto bookDto){
         Book book = new Book();
@@ -35,9 +35,15 @@ public class Book {
     public void addAuthor(Author author){
         this.authors.add(author);
     }
-
     public void removeAuthor(Author author){
         this.authors.remove(author);
+    }
+
+    public void addBorrowed(Borrowed borrowed){
+        this.borrowed.add(borrowed);
+    }
+    public void removeBorrowed(Borrowed borrowed){
+        this.borrowed.remove(borrowed);
     }
 
 }
