@@ -10,7 +10,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lombok.Data;
 
+@Data
 public class UserPrincipal implements UserDetails {
 
     private Long id;

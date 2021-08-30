@@ -52,6 +52,17 @@ public class DatabaseLoader implements ApplicationRunner {
         log.info("Successfully registered admin with [email: {}]", user.getEmail());
         users.save(user);
 
+        //User mock
+        //Admin mock
+        User user2 = new User("user", "user@gmail.com", "password");
+        user2.setPassword(passwordEncoder.encode("password"));
+        Role userRole2 = roles.findByName(RoleName.ROLE_USER)
+                .orElseThrow(() -> new AppException("User Role not set. Add default roles to database."));
+
+        user2.setRoles(Collections.singleton(userRole2));
+        log.info("Successfully registered admin with [email: {}]", user2.getEmail());
+        users.save(user2);
+
         //Authors mocks
         Author rowling = this.authors.save(new Author("J. K. Rowling"));
         Author tolkien = this.authors.save(new Author("J.R.R. Tolkien"));
