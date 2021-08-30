@@ -48,6 +48,10 @@ public class User implements Serializable {
     @JoinColumn(name = "borrowed_id")
     private List<Borrowed> borrowed; //Cart
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reservation_id")
+    private List<Reservation> reservations; //Cart
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -68,5 +72,11 @@ public class User implements Serializable {
         this.borrowed.remove(borrowed);
     }
 
+    public void addReservation(Reservation reservation){
+        this.reservations.add(reservation);
+    }
+    public void removeReservation(Reservation reservation){
+        this.reservations.remove(reservation);
+    }
 
 }

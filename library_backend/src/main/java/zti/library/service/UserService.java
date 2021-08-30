@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import zti.library.dto.UserSummary;
 import zti.library.exception.BorrowedNotFoundException;
 import zti.library.model.Borrowed;
+import zti.library.model.Reservation;
 import zti.library.model.User;
 import zti.library.repository.BorrowedRepository;
 import zti.library.repository.UserRepository;
@@ -20,12 +21,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BorrowedService borrowedService;
-
+    private final ReservationService reservationService;
 
     @Autowired
-    public UserService(UserRepository userRepository, BorrowedService borrowedService){
+    public UserService(UserRepository userRepository, BorrowedService borrowedService, ReservationService reservationService){
         this.userRepository = userRepository;
         this.borrowedService = borrowedService;
+        this.reservationService = reservationService;
     }
 
 
@@ -61,4 +63,14 @@ public class UserService {
         user.removeBorrowed(borrowed);
         return borrowed;
     }
+
+    @Transactional
+    public Reservation addReservationToUser(Long userId, Long reservationId){
+        Reservation reservation = reservationService.getReservation(reservationId);
+        User user = getUser(userId);
+        user.addReservation(reservation);
+        reservation.setUser(user);
+        return reservation;
+    }
+
 }

@@ -25,6 +25,10 @@ public class Book {
     @JoinColumn(name = "borrowed_book_id")
     private List<Borrowed> borrowed; //Cart
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reservation_book_id")
+    private List<Reservation> reservations; //Cart
+
     public static Book from(BookDto bookDto){
         Book book = new Book();
         book.setName(bookDto.getName());
@@ -46,4 +50,10 @@ public class Book {
         this.borrowed.remove(borrowed);
     }
 
+    public void addReservation(Reservation reservation){
+        this.reservations.add(reservation);
+    }
+    public void removeReservation(Reservation reservation){
+        this.reservations.remove(reservation);
+    }
 }
