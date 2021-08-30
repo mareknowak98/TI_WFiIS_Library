@@ -21,6 +21,10 @@ public class Book {
     @ManyToMany(mappedBy = "booksWritten", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Author> authors = new ArrayList<>();
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "booksInCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Category> categories = new ArrayList<>();
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "borrowed_book_id")
     private List<Borrowed> borrowed; //Cart
@@ -55,5 +59,12 @@ public class Book {
     }
     public void removeReservation(Reservation reservation){
         this.reservations.remove(reservation);
+    }
+
+    public void addCategory(Category category){
+        this.categories.add(category);
+    }
+    public void removeCategory(Category category){
+        this.categories.remove(category);
     }
 }

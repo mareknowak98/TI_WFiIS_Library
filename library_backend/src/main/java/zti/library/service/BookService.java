@@ -16,13 +16,15 @@ import javax.transaction.Transactional;
 public class BookService {
     private final BookRepository bookRepository;
     private final AuthorService authorService;
+    private final CategoryService categoryService;
     private final BorrowedService borrowedService;
     private final ReservationService reservationService;
 
     @Autowired
-    public BookService(BookRepository bookRepository, AuthorService authorService, BorrowedService borrowedService, ReservationService reservationService) {
+    public BookService(BookRepository bookRepository, AuthorService authorService, CategoryService categoryService, BorrowedService borrowedService, ReservationService reservationService) {
         this.bookRepository = bookRepository;
         this.authorService = authorService;
+        this.categoryService = categoryService;
         this.borrowedService = borrowedService;
         this.reservationService = reservationService;
     }
@@ -57,7 +59,6 @@ public class BookService {
         Book book = getBook(bookId);
         Author author = authorService.getAuthor(authorId);
         author.addAuthorToBook(book);
-//        book.addAuthor(author);
         return book;
     }
 
@@ -65,7 +66,7 @@ public class BookService {
     public Book removeAuthorFromBook(Long bookId, Long authorId){
         Book book = getBook(bookId);
         Author author = authorService.getAuthor(authorId);
-        book.removeAuthor(author);
+        author.removeAuthorFromBook(book);
         return book;
     }
 
@@ -93,6 +94,22 @@ public class BookService {
         book.addReservation(reservation);
         reservation.setBook(book);
         return reservation;
+    }
+
+    @Transactional
+    public Book addCategoryToBook(Long bookId, Long categoryId){
+        Book book = getBook(bookId);
+        Category category = categoryService.getCategory(categoryId);
+        category.addCategoryToBook(book);
+        return book;
+    }
+
+    @Transactional
+    public Book removeCategoryFromBook(Long bookId, Long categoryId){
+        Book book = getBook(bookId);
+        Category category = categoryService.getCategory(categoryId);
+        category.removeCategoryFromBook(book);
+        return book;
     }
 
 }
