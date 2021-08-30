@@ -1,6 +1,8 @@
 package zti.library.model;
 
 import lombok.Data;
+import zti.library.dto.BorrowedDto;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -28,11 +30,11 @@ public class Borrowed {
 
     public boolean getReturned(){return this.returned;}
 
-//    public static Borrowed from(BorrowedDto borrowedDto){
-//        Borrowed borrowed = new Borrowed();
-//        borrowed.setStartDate(borrowedDto.getStartDate());
-//        borrowed.setDueDate(borrowedDto.getDueDate());
-//        borrowed.setReturned(borrowedDto.getReturned());
-//        return borrowed;
-//    }
+    public static Borrowed from(BorrowedDto borrowedDto){
+        Borrowed borrowed = new Borrowed();
+        borrowed.setStartDate(borrowedDto.getStartDate());
+        borrowed.setDueDate(borrowedDto.getDueDate());
+        borrowed.setReturned(borrowedDto.getReturned());
+        return borrowed;
+    }
 }

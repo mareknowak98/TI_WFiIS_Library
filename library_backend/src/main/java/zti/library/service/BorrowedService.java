@@ -19,13 +19,13 @@ import javax.transaction.Transactional;
 @Service
 public class BorrowedService {
     private final BorrowedRepository borrowedRepository;
-    private final UserService userService;
+//    private final UserService userService;
 
 
     @Autowired
-    public BorrowedService(BorrowedRepository borrowedRepository, UserService userService){
+    public BorrowedService(BorrowedRepository borrowedRepository){
         this.borrowedRepository = borrowedRepository;
-        this.userService = userService;
+//        this.userService = userService;
     }
 
     public Borrowed addBorrowed(Borrowed borrowed){

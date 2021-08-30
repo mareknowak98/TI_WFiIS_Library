@@ -64,6 +64,9 @@ public class User implements Serializable {
     public void addBorrowed(Borrowed borrowed){
         this.borrowed.add(borrowed);
     }
+    public void removeBorrowed(Borrowed borrowed){
+        this.borrowed.remove(borrowed);
+    }
 
 
 }

@@ -10,6 +10,7 @@ import zti.library.repository.BorrowedRepository;
 import zti.library.repository.UserRepository;
 import zti.library.security.UserPrincipal;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -22,7 +23,7 @@ public class UserService {
 
 
     @Autowired
-    public UserService(UserRepository userRepository, BorrowedService borrowedService, UserService userService){
+    public UserService(UserRepository userRepository, BorrowedService borrowedService){
         this.userRepository = userRepository;
         this.borrowedService = borrowedService;
     }
@@ -44,8 +45,20 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new BorrowedNotFoundException(id)); //TODO
     }
 
+    @Transactional
     public Borrowed addBorrowedToUser(Long userId, Long borrowedId){
         Borrowed borrowed = borrowedService.getBorrowed(borrowedId);
         User user = getUser(userId);
+        user.addBorrowed(borrowed);
+        borrowed.setUser(user);
+        return borrowed;
+    }
+
+    @Transactional
+    public Borrowed removeBorrowedToUser(Long userId, Long borrowedId){
+        Borrowed borrowed = borrowedService.getBorrowed(borrowedId);
+        User user = getUser(userId);
+        user.removeBorrowed(borrowed);
+        return borrowed;
     }
 }

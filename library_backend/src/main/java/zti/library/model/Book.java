@@ -21,6 +21,10 @@ public class Book {
     @ManyToMany(mappedBy = "booksWritten", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Author> authors = new ArrayList<>();
 
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "borrowed_id")
+//    private List<Borrowed> borrowed; //Cart
+
     public static Book from(BookDto bookDto){
         Book book = new Book();
         book.setName(bookDto.getName());
