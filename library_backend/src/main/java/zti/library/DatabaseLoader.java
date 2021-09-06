@@ -19,6 +19,7 @@ import zti.library.service.AuthService;
 
 import zti.library.repository.*;
 import zti.library.model.*;
+import zti.library.service.BookService;
 
 @Component
 @Slf4j
@@ -30,14 +31,18 @@ public class DatabaseLoader implements ApplicationRunner {
     private PasswordEncoder passwordEncoder;
     private final AuthorRepository authors;
     private final CategoryRepository categories;
+    private final BookRepository books;
+    private final BookService bookService;
 
     @Autowired
-    public DatabaseLoader(UserRepository users, RoleRepository roles, PasswordEncoder passwordEncoder, AuthorRepository authors, CategoryRepository categories) {
+    public DatabaseLoader(UserRepository users, RoleRepository roles, PasswordEncoder passwordEncoder, AuthorRepository authors, CategoryRepository categories, BookRepository books, BookService bookService) {
         this.users = users;
         this.roles = roles;
         this.passwordEncoder= passwordEncoder;
         this.authors = authors;
         this.categories = categories;
+        this.books = books;
+        this.bookService = bookService;
     }
 
 
@@ -88,6 +93,31 @@ public class DatabaseLoader implements ApplicationRunner {
         log.info("Successfully registered category with [category: {}]", romance.getCategory());
         log.info("Successfully registered category with [category: {}]", thriller.getCategory());
         log.info("Successfully registered category with [category: {}]", science.getCategory());
+
+        //Books mocks
+        Book hp1 = new Book("Harry Potter and the Philosophers Stone");
+        this.books.save(hp1);
+        bookService.addAuthorToBook(hp1.getId(), rowling.getId());
+        bookService.addCategoryToBook(hp1.getId(), fantasy.getId());
+        log.info("Successfully registered book with [name: {}]", hp1.getName());
+
+        Book hp2 = new Book("Harry Potter and the Chamber of Secrets");
+        this.books.save(hp2);
+
+        bookService.addAuthorToBook(hp2.getId(), rowling.getId());
+        bookService.addCategoryToBook(hp2.getId(), fantasy.getId());
+        bookService.addCategoryToBook(hp2.getId(), adventure.getId());
+        log.info("Successfully registered book with [name: {}]", hp2.getName());
+
+        Book hobbit = new Book("The Hobbit");
+        this.books.save(hobbit);
+        bookService.addAuthorToBook(hobbit.getId(), rowling.getId());
+        bookService.addCategoryToBook(hobbit.getId(), fantasy.getId());
+        bookService.addCategoryToBook(hobbit.getId(), adventure.getId());
+
+        log.info("Successfully registered book with [name: {}]", hobbit.getName());
+
+
         log.info("-------SUCCESSFULLY ADDED ITEMS FROM DATABASE LOADER--------");
     }
 }

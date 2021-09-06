@@ -40,9 +40,15 @@ public class Book {
         return book;
     }
 
-    public void addAuthor(Author author){
-        this.authors.add(author);
+    public Book(){
+
     }
+
+    public Book(String name){
+        this.name = name;
+    }
+
+    public void addAuthor(Author author){ this.authors.add(author); }
     public void removeAuthor(Author author){
         this.authors.remove(author);
     }
