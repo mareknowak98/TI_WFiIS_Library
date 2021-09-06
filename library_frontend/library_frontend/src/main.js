@@ -67,7 +67,7 @@ const router = new VueRouter({
 
 Vue.config.productionTip = false;
 
-const DEFAULT_TITLE = 'sth';
+const DEFAULT_TITLE = 'Library App';
 
 router.afterEach((to) => {
     Vue.nextTick(() => {

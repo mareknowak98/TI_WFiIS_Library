@@ -13,14 +13,29 @@
             <b-row no-gutters>
               <tr>
                 <td width="300px">
-                  <b-card-img src="https://picsum.photos/600/300/?image=25" fluid alt="Responsive image" style="max-width: 240px"></b-card-img>
+                  <b-card-img src="https://lh3.googleusercontent.com/proxy/swjeISxuNV9nRi4WfIkTuL-gy2pK-_5R5WRRWtDBm6XjDp6-C9NCc9Xp_nQUrBbabKT9OdWhmCjKRC3HUhFughTMgZaQJ7I" fluid alt="Responsive image" style="max-width: 240px"></b-card-img>
               </td>
               </tr>
               <b-col>
                 <b-card-body :title="book.name">
                   <b-card-text>
                     <div id="entity-list">
-                      <td id="mytext" v-html="book.id"></td>
+                      <td id="mytext" v-html="'<strong>Publisher: </strong>' + book.publisher"></td>
+                    </div>
+                    <div id="entity-list">
+                      <td id="mytext" v-html="'<strong>Pages: </strong>' + book.pages"></td>
+                    </div>
+                    <div id="entity-list" style="text-align: left;">
+                      <strong>Categories: </strong>
+                      <template v-for="category in book.categories" style="white-space: nowrap;">
+                        {{category.category}},
+                      </template>
+                    </div>
+                    <div id="entity-list" style="text-align: left;">
+                      <strong>Authors: </strong>
+                      <template v-for="author in book.authors" style="white-space: nowrap;">
+                        {{author.author}},
+                      </template>
                     </div>
                   </b-card-text>
 
