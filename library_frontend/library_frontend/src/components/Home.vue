@@ -3,7 +3,35 @@
     <navbar></navbar>
     <b-jumbotron class="jumbotron jumbotron-home">
       <h2>Books</h2>
-      {{books}}
+      <!-- {{books[0]}} -->
+      <div class="">
+
+        <b-list-group v-for="(book) in books" :key="book.id">
+        <b-list-group-item :to="'/book/' + book.id">
+
+           <b-card no-body class="overflow-hidden">
+            <b-row no-gutters>
+              <tr>
+                <td width="300px">
+                  <b-card-img src="https://picsum.photos/600/300/?image=25" fluid alt="Responsive image" style="max-width: 240px"></b-card-img>
+              </td>
+              </tr>
+              <b-col>
+                <b-card-body :title="book.name">
+                  <b-card-text>
+                    <div id="entity-list">
+                      <td id="mytext" v-html="book.id"></td>
+                    </div>
+                  </b-card-text>
+
+                </b-card-body>
+              </b-col>
+            </b-row>
+          </b-card>
+        </b-list-group-item>
+      </b-list-group>
+      </div>
+
        <Footer></Footer>
 
      </b-jumbotron>
@@ -53,29 +81,11 @@ export default {
 };
 </script>
 
+
+
 <style scoped>
 @import '../../styles/style.css';
 
-.custom {
-    width: 73px !important;
-}
-.custom2 {
-    width: 219px!important;
-}
-
-
-.myform1{
-  padding: 0%;
-  margin-left: 0%;
-  margin-right: 0.3%;
-  text-align: left;
-}
-.myform2{
-  padding: 0%;
-  margin: 0%;
-  text-align: left;
-
-}
 @media (min-width: 100px) {
     .container{
         max-width: 1400px;

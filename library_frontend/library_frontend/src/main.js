@@ -6,6 +6,9 @@ import VueRouter from 'vue-router';
 import Home from './components/Home.vue';
 import Register from './components/Register.vue';
 import addBook from './components/AddBook.vue'
+import DetailedBook from './components/DetailedBook.vue';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 
@@ -32,6 +35,11 @@ const routes = [{
         component: addBook
     },
     {
+        path: "/book/:bookId",
+        name: "bookDetailed",
+        component: DetailedBook
+    },
+    {
         path: '/*',
         redirect: { name: 'home' }
     },
@@ -40,7 +48,15 @@ const routes = [{
 
 Vue.mixin({
     methods: {
-
+        $goToAnotherPage: function(page) {
+            this.$router.push(page);
+        },
+        $goToMainPage: function() {
+            if (this.$route.path !== "/") this.$router.replace("/")
+        },
+        $getToken: function() {
+            return localStorage.getItem("user-token");
+        }
     }
 })
 

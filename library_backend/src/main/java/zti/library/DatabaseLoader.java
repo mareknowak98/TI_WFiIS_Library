@@ -95,13 +95,13 @@ public class DatabaseLoader implements ApplicationRunner {
         log.info("Successfully registered category with [category: {}]", science.getCategory());
 
         //Books mocks
-        Book hp1 = new Book("Harry Potter and the Philosophers Stone");
+        Book hp1 = new Book("Harry Potter and the Philosophers Stone", "Bloomsbury Pub Ltd", "978-0747532743", 224 , "Harry Potter is an ordinary boy who lives in a cupboard under the stairs at his Aunt Petunia and Uncle Vernon's house, which he thinks is normal...");
         this.books.save(hp1);
         bookService.addAuthorToBook(hp1.getId(), rowling.getId());
         bookService.addCategoryToBook(hp1.getId(), fantasy.getId());
         log.info("Successfully registered book with [name: {}]", hp1.getName());
 
-        Book hp2 = new Book("Harry Potter and the Chamber of Secrets");
+        Book hp2 = new Book("Harry Potter and the Chamber of Secrets", "Scholastic Paperbacks", "978-0439064873", 341 , "The Dursleys were so mean that hideous that summer that all Harry Potter wanted was to get back to the Hogwarts School for Witchcraft and...");
         this.books.save(hp2);
 
         bookService.addAuthorToBook(hp2.getId(), rowling.getId());
@@ -109,9 +109,9 @@ public class DatabaseLoader implements ApplicationRunner {
         bookService.addCategoryToBook(hp2.getId(), adventure.getId());
         log.info("Successfully registered book with [name: {}]", hp2.getName());
 
-        Book hobbit = new Book("The Hobbit");
+        Book hobbit = new Book("The Hobbit", "Houghton Mifflin Harcourt", "978-0544174221", 384 , "Like every other hobbit, Bilbo Baggins likes nothing better than a quiet evening in his snug hole in the ground, dining on a sumptuous dinner in front of a fire...");
         this.books.save(hobbit);
-        bookService.addAuthorToBook(hobbit.getId(), rowling.getId());
+        bookService.addAuthorToBook(hobbit.getId(), tolkien.getId());
         bookService.addCategoryToBook(hobbit.getId(), fantasy.getId());
         bookService.addCategoryToBook(hobbit.getId(), adventure.getId());
 

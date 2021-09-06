@@ -9,19 +9,73 @@
     >
       Invalid password or username.
     </b-alert>
+    <div v-if="$getToken() == null">
     <b-jumbotron class="jumbotron jumbotron-special" header=" ">
         <h1> </h1>
         <h1> </h1>
         <h1> </h1>
         <h1> </h1>
     </b-jumbotron>
+    <b-navbar toggleable="lg" type="dark" variant="dark">
+    
+
+      <b-navbar-brand href="#">Strona główna</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <b-navbar-nav>
+            <b-nav-item v-b-modal.loginModal>Login</b-nav-item>
+            <b-nav-item href="/register">Zarejestruj się</b-nav-item>
+          </b-navbar-nav>
+        </b-navbar-nav>
+      </b-collapse>
+
+  </b-navbar>
+  </div>
+    <div v-else>
+      <b-jumbotron class="jumbotron jumbotron-special" header=" ">
+          <h1> </h1>
+          <h1> </h1>
+          <h1> </h1>
+          <h1> </h1>
+      </b-jumbotron>
+      <b-navbar toggleable="lg" type="dark" variant="dark">
+      
+
+        <b-navbar-brand href="#">Strona główna</b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <b-navbar-nav>
+              <b-nav-item v-on:click="logout()">Wyloguj się</b-nav-item>
+            </b-navbar-nav>
+          </b-navbar-nav>
+        </b-collapse>
+
+      </b-navbar>
+    </div>
+
+  <b-modal id="loginModal" title="Log in" @ok="login" ok-title="Log in">
+
+    <label class="mb-2">Please enter your email and password, then press Log in.</label>
+    <b-form-input class="mb-2" placeholder="Email" v-model="email" autocomplete="email"></b-form-input>
+    <b-form-input class="mb-2" placeholder="Password" v-model="password" type="password"></b-form-input>
+  </b-modal>
   </div>
 </template>
 
 
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
   export default {
     name: "Navbar",
     components:{
@@ -29,14 +83,41 @@
     },
     data(){
       return{
-        
+        email: '',
+        password: '',
+        token: ''
       }
     },
     mounted: function (){
       
     },
     methods: {
-     
+        login(){
+        axios.post('http://localhost:5000/api/auth/signin',{
+          email: this.email,
+          password: this.password,
+        })
+        .then(resp => {
+          this.token = resp.data.accessToken;
+          localStorage.setItem('user-token',resp.data.accessToken)
+          this.email = '';
+          this.password = '';
+        })
+        .catch(err => {
+          this.email = '';
+          this.password = '';
+          console.log(err)
+          localStorage.removeItem('user-token');
+          this.showCredentialsAlert = true;
+          this.$forceUpdate();
+        })
+      },
+
+      logout() {
+        localStorage.removeItem('user-token');
+        this.$goToMainPage();
+        this.$forceUpdate();
+        },
     
     }
   }
