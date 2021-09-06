@@ -3,7 +3,6 @@
     <navbar></navbar>
     <b-jumbotron class="jumbotron jumbotron-home">
       <h2>Books</h2>
-      <!-- {{books[0]}} -->
       <div class="">
 
         <b-list-group v-for="(book) in books" :key="book.id">

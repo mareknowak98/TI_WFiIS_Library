@@ -19,7 +19,7 @@
     <b-navbar toggleable="lg" type="dark" variant="dark">
     
 
-      <b-navbar-brand href="#">Strona główna</b-navbar-brand>
+      <b-navbar-brand v-on:click="$goToAnotherPage('/')">Strona główna</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -46,7 +46,7 @@
       <b-navbar toggleable="lg" type="dark" variant="dark">
       
 
-        <b-navbar-brand href="#">Strona główna</b-navbar-brand>
+        <b-navbar-brand v-on:click="$goToAnotherPage('/')">Strona główna</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -125,7 +125,7 @@ import axios from 'axios';
 
 <style scoped>
 .jumbotron-special{
-  background-image: url("../../static/bidbackground.jpg");
+  background-image: url("../../static/books.jpeg");
   background-size: cover;
   margin-bottom: 0.5%;
 

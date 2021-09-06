@@ -5,6 +5,7 @@ import axios from "axios";
 import VueRouter from 'vue-router';
 import Home from './components/Home.vue';
 import Register from './components/Register.vue';
+import EnlargeableImage from '@diracleo/vue-enlargeable-image';
 import addBook from './components/AddBook.vue'
 import DetailedBook from './components/DetailedBook.vue';
 import 'bootstrap/dist/css/bootstrap.css'
@@ -13,9 +14,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.config.productionTip = false
 
 // window.axios = require('axios');
+
 import { BootstrapVue } from 'bootstrap-vue'
 Vue.use(VueRouter);
 Vue.use(BootstrapVue)
+Vue.use(EnlargeableImage)
+Vue.component('enlargeable-image', EnlargeableImage)
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 
