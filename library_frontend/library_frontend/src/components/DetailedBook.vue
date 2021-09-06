@@ -76,17 +76,16 @@ import axios from 'axios';
 
     methods:{
         getBook(i){
-            let config = {
-                    headers: {
-                    'Content-Type': 'application/json',
-                    }
-                }
-                    axios.get('http://localhost:5000/books/' + i, config)
-                    .then(res => (this.book = res.data))
-                    .catch(err => {
-                    console.log(err);
-                    })
-                
+          let config = {
+              headers: {
+              'Content-Type': 'application/json',
+              }
+          }
+          axios.get('http://localhost:5000/books/' + i, config)
+          .then(res => (this.book = res.data))
+          .catch(err => {
+          console.log(err);
+          })     
         }
     }
   }

@@ -79,7 +79,6 @@ import axios from 'axios';
 
     methods:{
       registerUser(){
-        console.log('es')
         let config = {
           headers: {
             'Content-Type': 'application/json',
@@ -92,8 +91,8 @@ import axios from 'axios';
           }, config)
           .catch(err => {
           console.log(err);
+          this.$goToMainPage();
           })
-        console.log('es2')
       }
 
     }

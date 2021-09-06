@@ -44,10 +44,34 @@
           <h1> </h1>
       </b-jumbotron>
       <b-navbar toggleable="lg" type="dark" variant="dark">
-      
 
         <b-navbar-brand v-on:click="$goToAnotherPage('/')">Strona główna</b-navbar-brand>
 
+        <div v-if="userInfo.roles[0].name == 'ROLE_USER'">
+          <b-navbar-nav>
+            <b-nav-item href="#">Zarezerwuj książkę</b-nav-item>
+
+            <b-nav-item-dropdown text="Moje konto" right>
+              <b-dropdown-item href="#">Wypożyczone książki</b-dropdown-item>
+              <b-dropdown-item href="#">Zarezerwowane książki</b-dropdown-item>
+              <b-dropdown-item href="#">Oddane ksiażki</b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+        </div>
+
+        <div v-if="userInfo.roles[0].name == 'ROLE_ADMIN'">
+          <b-navbar-nav>
+            <b-nav-item href="#">Wypożycz książkę</b-nav-item>
+            <b-nav-item href="#">Zwróć książkę</b-nav-item>
+
+            <b-nav-item-dropdown text="Dodaj" right>
+              <b-dropdown-item href="#">Dodaj autora</b-dropdown-item>
+              <b-dropdown-item href="#">Dodaj kategorię</b-dropdown-item>
+              <b-dropdown-item href="#">Dodaj książkę</b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+        </div>
+        
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
@@ -85,11 +109,12 @@ import axios from 'axios';
       return{
         email: '',
         password: '',
-        token: ''
+        token: '',
+        userInfo: ''
       }
     },
     mounted: function (){
-      
+      this.getUserInfo();
     },
     methods: {
         login(){
@@ -98,10 +123,15 @@ import axios from 'axios';
           password: this.password,
         })
         .then(resp => {
-          this.token = resp.data.accessToken;
+          this.token = resp.data.accessToken; //TODO delete
+          localStorage.removeItem('user-token');
           localStorage.setItem('user-token',resp.data.accessToken)
           this.email = '';
           this.password = '';
+        })
+        .then(resp => {
+          console.log(resp)
+          this.getUserInfoOnLogin()
         })
         .catch(err => {
           this.email = '';
@@ -117,7 +147,38 @@ import axios from 'axios';
         localStorage.removeItem('user-token');
         this.$goToMainPage();
         this.$forceUpdate();
-        },
+      },
+
+      getUserInfo(){
+        console.log(localStorage.getItem('user-token'))
+        if(localStorage.getItem('user-token') != null){
+          let config = {
+              headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+              }
+          }
+          axios.get('http://localhost:5000/api/users/me', config)
+          .then(res => (this.userInfo = res.data))
+          .catch(err => {
+          console.log(err);
+          })    
+        }
+      }, 
+      getUserInfoOnLogin(){
+        console.log(localStorage.getItem('user-token'))
+        let config = {
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+            }
+        }
+        axios.get('http://localhost:5000/api/users/me', config)
+        .then(res => (this.userInfo = res.data))
+        .catch(err => {
+        console.log(err);
+        })    
+      }
     
     }
   }
