@@ -7,34 +7,34 @@
       <b-button v-b-toggle.collapse-1 variant="outline-primary">
         <b-icon icon="plus-circle"></b-icon> Dodaj
       </b-button>
-      <b-button v-b-toggle.collapse-2 variant="outline-primary" v-on:click="getCategories()">
+      <b-button v-b-toggle.collapse-2 variant="outline-primary" v-on:click="getAuthors()">
         <b-icon icon="x-circle"></b-icon> Usuń
       </b-button>
     </b-button-group>
 
     <b-collapse id="collapse-1" class="mt-2">
-        <h1>Nowa kategoria:</h1>
+        <h1>Nowy autor:</h1>
         <b-form>
         <b-form-group id="input-group-1" label="" label-for="input-1">
             <b-form-input
             id="input-1"
-            v-model="form.category"
+            v-model="form.author"
             required
-            placeholder="Kategoria"
+            placeholder="Imię i nazwysko autora"
             ></b-form-input>
         </b-form-group>
 
-        <b-button block type="submit" v-on:click="addCategory()" variant="secondary">Dodaj</b-button>
+        <b-button block type="submit" v-on:click="addAuthor()" variant="secondary">Dodaj</b-button>
         </b-form>
     </b-collapse>
 
     <b-collapse id="collapse-2" class="mt-2">
-        <h1>Usuń kategorię</h1>
+        <h1>Usuń autora</h1>
             <label class="typo__label"></label>
-            <multiselect v-model="selected_category" deselect-label="Can't remove this value" track-by="category" label="category" placeholder="Select one" :options="categories" :searchable="false" :allow-empty="false">
-                <template slot="singleLabel" slot-scope="{ option }">Kategoria do usunięcia: <strong>{{ option.category }}</strong></template>
+            <multiselect v-model="selected_author" deselect-label="Can't remove this value" track-by="author" label="author" placeholder="Wybierz autora do usunięcia" :options="authors" :searchable="false" :allow-empty="false">
+                <template slot="singleLabel" slot-scope="{ option }">Autor do usunięcia: <strong>{{ option.author }}</strong></template>
             </multiselect>
-        <b-button block type="submit" v-on:click="removeCategory()" variant="secondary">Usuń</b-button>
+        <b-button block type="submit" v-on:click="removeAuthor()" variant="secondary">Usuń</b-button>
     </b-collapse>
 
     <Footer></Footer>
@@ -63,10 +63,10 @@ import axios from 'axios';
     data() {
       return {
         form: {
-          category: '',
+          author: '',
         },
-        categories: '',
-        selected_category: null
+        authors: '',
+        selected_author: null
       }
     },
 
@@ -78,44 +78,44 @@ import axios from 'axios';
     },
 
     methods:{
-      addCategory(){
+      addAuthor(){
         let config = {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('user-token')
           }
         }
-          axios.post('http://localhost:5000/categories',{
-          category: this.form.category,
+          axios.post('http://localhost:5000/authors',{
+          author: this.form.author,
           }, config)
-          .then(this.form.category = '')
+          .then(this.form.author = '')
           .catch(err => {
           console.log(err);
           })
       },
 
-      removeCategory(){
+      removeAuthor(){
         let config = {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('user-token')
           }
         }
-          axios.delete('http://localhost:5000/categories/' + this.selected_category.id, config)
-          .then(this.selected_category = null, this.getCategories())
+          axios.delete('http://localhost:5000/authors/' + this.selected_author.id, config)
+          .then(this.selected_author = null, this.getAuthors())
           .catch(err => {
           console.log(err);
           })
       },
 
-      getCategories(){
+      getAuthors(){
          let config = {
           headers: {
             'Content-Type': 'application/json',
           }
         }
-          axios.get('http://localhost:5000/categories', config)
-          .then(res => (this.categories = res.data))
+          axios.get('http://localhost:5000/authors', config)
+          .then(res => (this.authors = res.data))
           .catch(err => {
           console.log(err);
           })

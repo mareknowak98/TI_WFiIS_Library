@@ -9,6 +9,7 @@ import EnlargeableImage from '@diracleo/vue-enlargeable-image';
 import addBook from './components/AddBook.vue'
 import DetailedBook from './components/DetailedBook.vue';
 import addCategory from './components/AddCategory.vue'
+import addAuthor from './components/AddAuthor.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -44,6 +45,11 @@ const routes = [{
         path: "/addCategory",
         name: "addCategory",
         component: addCategory
+    },
+    {
+        path: "/addAuthor",
+        name: "addAuthor",
+        component: addAuthor
     },
     {
         path: "/book/:bookId",
