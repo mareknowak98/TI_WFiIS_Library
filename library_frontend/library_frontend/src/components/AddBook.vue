@@ -1,5 +1,15 @@
 <template>
   <div class="container">
+    <b-alert
+      variant="success"
+      dismissible
+      fade
+      :show="showBookSuccesAlert"
+      @dismissed="showBookSuccesAlert=false"
+    >
+      Pomyślnie dodania książkę.
+    </b-alert>
+
   <navbar></navbar>
   <b-jumbotron class="jumbotron jumbotron-home">
 
@@ -104,8 +114,6 @@ import axios from 'axios';
           pages: '',
           isbn: '',
           description: '',
-          authorId: {},
-          categoryId: {}
         },
         authors: null,
         categories: null,
@@ -126,7 +134,6 @@ import axios from 'axios';
 
     methods:{
 
-      //TODO fix it
     addBook(){
         axios({
             url: 'http://localhost:5000/books',
@@ -136,16 +143,42 @@ import axios from 'axios';
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
                 },
             data: {
-                name: this.form.name
+                name: this.form.name,
+                publisher: this.form.publisher,
+                description: this.form.description,
+                isbn: this.form.isbn,
+                pages: this.form.pages
             }
         }).then(resp => (this.book = resp.data.id ,
         axios({
-            url: 'http://localhost:5000/books/' + resp.data.id + '/authors/' + this.form.authorId + '/add',
+            url: 'http://localhost:5000/books/' + resp.data.id + '/addManyAuthors',
             method: 'post',
             headers: {
                 'Content-Type': 'application/json', 
+                'Authorization': 'Bearer ' + localStorage.getItem('user-token')
                 },
+            data: this.selected_author
         })))
+        .then(resp => (this.book = resp.data.id ,
+        axios({
+            url: 'http://localhost:5000/books/' + resp.data.id + '/addManyCategories',
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json', 
+                'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+                },
+            data: this.selected_categories
+        })))
+        .then(resp => (this.book = resp.data.id ,
+          this.showBookSuccesAlert = true,
+          this.form.name = '',
+          this.form.publisher = '',
+          this.form.pages = '',
+          this.form.isbn = '',
+          this.form.description = '',
+          this.selected_author = null,
+          this.selected_categories = null
+        ))
 
       },
 

@@ -14,4 +14,6 @@ public class AuthorDto {
         authorDto.setAuthor(author.getAuthor());
         return authorDto;
     }
+
+    public Long getId(){ return this.id;}
 }

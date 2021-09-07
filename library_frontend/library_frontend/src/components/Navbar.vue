@@ -64,7 +64,7 @@
             <b-nav-item href="#">Wypożycz książkę</b-nav-item>
             <b-nav-item href="#">Zwróć książkę</b-nav-item>
 
-            <b-nav-item-dropdown text="Dodaj" right>
+            <b-nav-item-dropdown text="Zarządzaj" right>
               <b-dropdown-item href="/addAuthor">Zarządzaj autorami</b-dropdown-item>
               <b-dropdown-item href="/addCategory">Zarządzaj kategoriami</b-dropdown-item>
               <b-dropdown-item href="/addBook">Dodaj książkę</b-dropdown-item>
@@ -133,6 +133,7 @@ import axios from 'axios';
           console.log(resp)
           this.getUserInfoOnLogin()
         })
+        .then(this.$goToMainPage())
         .catch(err => {
           this.email = '';
           this.password = '';
@@ -165,6 +166,7 @@ import axios from 'axios';
           })    
         }
       }, 
+      
       getUserInfoOnLogin(){
         console.log(localStorage.getItem('user-token'))
         let config = {

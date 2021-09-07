@@ -8,6 +8,17 @@
           <enlargeable-image src="https://lh3.googleusercontent.com/proxy/swjeISxuNV9nRi4WfIkTuL-gy2pK-_5R5WRRWtDBm6XjDp6-C9NCc9Xp_nQUrBbabKT9OdWhmCjKRC3HUhFughTMgZaQJ7I" src_large="https://lh3.googleusercontent.com/proxy/swjeISxuNV9nRi4WfIkTuL-gy2pK-_5R5WRRWtDBm6XjDp6-C9NCc9Xp_nQUrBbabKT9OdWhmCjKRC3HUhFughTMgZaQJ7I"/>
         </b-col>
         <b-col sm="8" style="text-align: left;">
+
+          <div v-if="userInfo != null && userInfo.roles[0].name == 'ROLE_ADMIN'">
+            <b-row>
+              <b-col sm="6">
+                <b-button block variant="danger" v-on:click="removeBook()">Usuń</b-button>
+              </b-col>
+              <b-col sm="6">
+                <b-button block variant="warning" v-on:click="editBook()">Edytuj</b-button>
+              </b-col>
+            </b-row>
+          </div>
           <h1>{{book.name}}</h1>
           <p>
             <strong>Autorzy: </strong>
@@ -60,7 +71,8 @@ import axios from 'axios';
     data() {
       return {
         bookId: '',
-        book:{}
+        book:{},
+        userInfo: null
       }
     },
 
@@ -68,6 +80,7 @@ import axios from 'axios';
 
       this.bookId = this.$route.params.bookId;
       this.getBook(this.bookId)
+      this.getUserInfo();
     },
 
     computed: {
@@ -86,7 +99,41 @@ import axios from 'axios';
           .catch(err => {
           console.log(err);
           })     
+        },
+
+        getUserInfo(){
+        if(localStorage.getItem('user-token') != null){
+          let config = {
+              headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+              }
+          }
+          axios.get('http://localhost:5000/api/users/me', config)
+          .then(res => (this.userInfo = res.data))
+          .catch(err => {
+          console.log(err);
+          })    
         }
+      }, 
+
+      removeBook(){
+        let config = {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+          }
+        }
+          axios.delete('http://localhost:5000/books/' + this.book.id, config)
+          .then(this.$goToMainPage())
+          .catch(err => {
+          console.log(err);
+          })
+      },
+
+      editBook(){
+
+      }
     }
   }
 </script>
