@@ -65,9 +65,9 @@
             <b-nav-item href="#">Zwróć książkę</b-nav-item>
 
             <b-nav-item-dropdown text="Dodaj" right>
-              <b-dropdown-item href="#">Dodaj autora</b-dropdown-item>
-              <b-dropdown-item href="#">Dodaj kategorię</b-dropdown-item>
-              <b-dropdown-item href="#">Dodaj książkę</b-dropdown-item>
+              <b-dropdown-item href="/addAuthor">Zarządzaj autorami</b-dropdown-item>
+              <b-dropdown-item href="/addCategory">Zarządzaj kategoriami</b-dropdown-item>
+              <b-dropdown-item href="/addBook">Dodaj książkę</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </div>

@@ -60,7 +60,6 @@ public class DatabaseLoader implements ApplicationRunner {
         users.save(user);
 
         //User mock
-        //Admin mock
         User user2 = new User("user", "user@gmail.com", "password");
         user2.setPassword(passwordEncoder.encode("password"));
         Role userRole2 = roles.findByName(RoleName.ROLE_USER)
@@ -69,6 +68,12 @@ public class DatabaseLoader implements ApplicationRunner {
         user2.setRoles(Collections.singleton(userRole2));
         log.info("Successfully registered admin with [email: {}]", user2.getEmail());
         users.save(user2);
+
+        User user3 = new User("user2", "user2@gmail.com", "password");
+        user3.setPassword(passwordEncoder.encode("password"));
+        user3.setRoles(Collections.singleton(userRole2));
+        log.info("Successfully registered admin with [email: {}]", user3.getEmail());
+        users.save(user3);
 
         //Authors mocks
         Author rowling = this.authors.save(new Author("J. K. Rowling"));

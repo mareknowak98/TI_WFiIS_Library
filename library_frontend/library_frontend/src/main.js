@@ -8,6 +8,7 @@ import Register from './components/Register.vue';
 import EnlargeableImage from '@diracleo/vue-enlargeable-image';
 import addBook from './components/AddBook.vue'
 import DetailedBook from './components/DetailedBook.vue';
+import addCategory from './components/AddCategory.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -15,10 +16,11 @@ Vue.config.productionTip = false
 
 // window.axios = require('axios');
 
-import { BootstrapVue } from 'bootstrap-vue'
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 Vue.use(VueRouter);
 Vue.use(BootstrapVue)
 Vue.use(EnlargeableImage)
+Vue.use(BootstrapVueIcons)
 Vue.component('enlargeable-image', EnlargeableImage)
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
@@ -37,6 +39,11 @@ const routes = [{
         path: "/addBook",
         name: "addBook",
         component: addBook
+    },
+    {
+        path: "/addCategory",
+        name: "addCategory",
+        component: addCategory
     },
     {
         path: "/book/:bookId",

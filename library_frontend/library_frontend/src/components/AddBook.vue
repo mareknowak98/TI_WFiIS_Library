@@ -2,27 +2,74 @@
   <div class="container">
   <navbar></navbar>
   <b-jumbotron class="jumbotron jumbotron-home">
-    <h2>Authors</h2>
-    {{authors}}
-    <h1>Add book:</h1>
-      <b-form @submit.prevent="registerUser">
-      <b-form-group id="input-group-1" label="Book name:" label-for="input-1">
+
+    <h1>Dodaj książkę:</h1>
+      <b-form @submit.prevent="addBook">
+        <b-form-group id="input-group-1" label="Tytuł:" label-for="input-1">
         <b-form-input
           id="input-1"
           v-model="form.name"
           required
-          placeholder="Enter username"
+          placeholder="Tytuł:"
         ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="Author id (temporary):" label-for="input-2">
+        <div v-if="authors != null">
+        <div>
+          <label class="typo__label">Wybierz autorów</label>
+          <multiselect v-model="selected_author" :options="authors" :multiple="true" :close-on-select="false" :clear-on-select="false" placeholder="Wybierz autorów" label="author" track-by="id" :preselect-first="false">
+            <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} autorów</span></template>
+          </multiselect>
+        </div>
+        </div>
+
+        <b-form-group id="input-group-2" label="Wydawnictwo:" label-for="input-2">
         <b-form-input
           id="input-2"
-          v-model="form.authorId"
+          v-model="form.publisher"
           required
-          placeholder="Enter author's id"
+          placeholder="Wydawnictwo"
         ></b-form-input>
         </b-form-group>
+
+        <div v-if="categories != null">
+        <div>
+          <label class="typo__label">Wybierz kategorie</label>
+          <multiselect v-model="selected_categories" :options="categories" :multiple="true" :close-on-select="false" :clear-on-select="false" placeholder="Wybierz kategorie" label="category" track-by="id" :preselect-first="false">
+            <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} kategorie</span></template>
+          </multiselect>
+        </div>
+        </div>
+
+        <b-form-group id="input-group-3" label="Strony:" label-for="input-3">
+        <b-form-input
+          id="input-3"
+          v-model="form.pages"
+          required
+          placeholder="Strony"
+        ></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="input-group-4" label="Nr ISBN:" label-for="input-4">
+        <b-form-input
+          id="input-4"
+          v-model="form.isbn"
+          required
+          placeholder="ISBN"
+        ></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="input-group-5" label="Opis:" label-for="input-5">
+        <b-form-textarea
+          id="textarea-state"
+          v-model="form.description"
+          :state="form.description.length >= 10"
+          placeholder="Opis musi być dłuższy niż 10 znaków"
+          rows="3"
+        ></b-form-textarea>
+        </b-form-group>
+
+
 
       <b-button block type="submit" variant="secondary">Submit</b-button>
       </b-form>
@@ -36,6 +83,7 @@
 <script>
 import Navbar from './Navbar.vue'
 import Footer from './Footer.vue'
+import Multiselect from 'vue-multiselect'
 
 
 import axios from 'axios';
@@ -44,6 +92,7 @@ import axios from 'axios';
     components:{
         Navbar,
         Footer,
+        Multiselect,
     },
   
 
@@ -51,15 +100,24 @@ import axios from 'axios';
       return {
         form: {
           name: '',
-          authorId: ''
+          publisher: '',
+          pages: '',
+          isbn: '',
+          description: '',
+          authorId: {},
+          categoryId: {}
         },
-        authors: {},
+        authors: null,
+        categories: null,
         book: '',
+        selected_author: null,
+        selected_categories: null
       }
     },
 
     mounted() {
         this.getAuthors();
+        this.getCategories();
     },
 
     computed: {
@@ -67,31 +125,15 @@ import axios from 'axios';
     },
 
     methods:{
-    //   registerUser(){
-    //     console.log('es')
-    //     let config = {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         "accept": "*/*"
-    //       }
-    //     }
-    //       axios.post('http://localhost:5000/api/books',{
-    //       name: this.form.name,
-    //       }, config)
-    //       .catch(err => {
-    //       console.log(err);
-    //       })
-    //     console.log('es2')
-    //   }
 
-
-    registerUser(){
+      //TODO fix it
+    addBook(){
         axios({
             url: 'http://localhost:5000/books',
             method: 'post',
             headers: {
                 'Content-Type': 'application/json', 
-                // 'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjMwMjM4MTYyLCJleHAiOjE2MzA4NDI5NjJ9.OWH9qtkiquie7Vhl0cz05vRqdY1MSufRrWnJJzQnEJi_e4X0QjLECqIdJ2P2drsjw38Zgxzz61qb2NShNAv3CA'
+                'Authorization': 'Bearer ' + localStorage.getItem('user-token')
                 },
             data: {
                 name: this.form.name
@@ -118,6 +160,19 @@ import axios from 'axios';
           .catch(err => {
           console.log(err);
           })
+      },
+
+      getCategories(){
+         let config = {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
+          axios.get('http://localhost:5000/categories', config)
+          .then(res => (this.categories = res.data))
+          .catch(err => {
+          console.log(err);
+          })
       }
     }
   }
@@ -131,3 +186,5 @@ import axios from 'axios';
 }
 
 </style>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
