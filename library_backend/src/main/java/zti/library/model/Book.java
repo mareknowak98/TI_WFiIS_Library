@@ -30,7 +30,7 @@ public class Book {
     @ManyToMany(mappedBy = "booksInCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Category> categories = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "borrowed_book_id")
     private List<Borrowed> borrowed; //Cart
 
@@ -41,7 +41,7 @@ public class Book {
     public static Book from(BookDto bookDto){
         Book book = new Book();
         book.setName(bookDto.getName());
-        book.setAuthors(bookDto.getAuthors());
+//        book.setAuthors(bookDto.getAuthors());
         book.setPublisher(bookDto.getPublisher());
         book.setIsbn(bookDto.getIsbn());
         book.setPages(bookDto.getPages());

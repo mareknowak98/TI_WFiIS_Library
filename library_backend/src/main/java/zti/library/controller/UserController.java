@@ -5,12 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import zti.library.dto.BookDto;
-import zti.library.dto.BorrowedDto;
-import zti.library.dto.UserDto;
-import zti.library.dto.UserSummary;
+import zti.library.dto.*;
 import zti.library.model.Book;
 import zti.library.model.Borrowed;
+import zti.library.model.Category;
 import zti.library.model.User;
 import zti.library.repository.BorrowedRepository;
 import zti.library.security.CurrentUser;
@@ -68,6 +66,12 @@ public class UserController {
         userService.addBorrowedToUser(userId, borrowed.getId());
         bookService.addBorrowedToBook(bookId, borrowed.getId());
         return new ResponseEntity<>(BorrowedDto.from(borrowed), HttpStatus.OK);
+    }
+
+    @PutMapping("addBorrowedToUser/return")
+    public ResponseEntity<BorrowedDto> returnBorrowedToUser(@RequestBody final BorrowedDto borrowedDto){
+        Borrowed borrowedToEdit = borrowedService.editBorrowed(borrowedDto.getId(), Borrowed.from(borrowedDto));
+        return new ResponseEntity<>(BorrowedDto.from(borrowedToEdit), HttpStatus.OK);
     }
 
 

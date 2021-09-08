@@ -11,10 +11,13 @@ import zti.library.dto.BookDto;
 import zti.library.dto.CategoryDto;
 import zti.library.model.Author;
 import zti.library.model.Book;
+import zti.library.model.Category;
 import zti.library.service.BookService;
 import zti.library.service.AuthorService;
+import zti.library.service.CategoryService;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,10 +27,13 @@ import java.util.stream.Collectors;
 public class BookController {
     private final BookService bookService;
     private final AuthorService authorService;
+    private final CategoryService categoryService;
+
     @Autowired
-    public BookController(BookService bookService, AuthorService authorService){
+    public BookController(BookService bookService, AuthorService authorService,CategoryService categoryService){
         this.authorService = authorService;
         this.bookService = bookService;
+        this.categoryService = categoryService;
     }
 
     @PostMapping
@@ -47,7 +53,23 @@ public class BookController {
     @GetMapping(value = "{id}")
     public ResponseEntity<BookDto> getBook(@PathVariable final Long id){
         Book book = bookService.getBook(id);
+        List<Category> categories = book.getCategories();
+        List<Author> authors = book.getAuthors();
         return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "{id}/categories")
+    public ResponseEntity<List<CategoryDto>> getBookCategory(@PathVariable final Long id){
+        Book book = bookService.getBook(id);
+        List<Category> categories = book.getCategories();
+        return new ResponseEntity<>(categories.stream().map(CategoryDto::from).collect(Collectors.toList()), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "{id}/authors")
+    public ResponseEntity<List<AuthorDto>> getBookAuthor(@PathVariable final Long id){
+        Book book = bookService.getBook(id);
+        List<Author> authors = book.getAuthors();
+        return new ResponseEntity<>(authors.stream().map(AuthorDto::from).collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "{id}")

@@ -16,15 +16,15 @@ public class BookDto {
     private String isbn;
     private int pages;
     private String description;
-    private List<Author> authors = new ArrayList<>();
-    private List<Category> categories = new ArrayList<>();
+//    private List<Author> authors = new ArrayList<>();
+//    private List<Category> categories = new ArrayList<>();
 
     public static BookDto from(Book book){
         BookDto bookDto = new BookDto();
         bookDto.setId(book.getId());
-        bookDto.setAuthors(book.getAuthors());
+//        bookDto.setAuthors(book.getAuthors());
         bookDto.setName(book.getName());
-        bookDto.setCategories(book.getCategories());
+//        bookDto.setCategories(book.getCategories());
         bookDto.setPublisher(book.getPublisher());
         bookDto.setIsbn(book.getIsbn());
         bookDto.setPages(book.getPages());

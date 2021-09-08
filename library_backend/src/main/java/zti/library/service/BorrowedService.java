@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import zti.library.exception.BorrowedNotFoundException;
 import zti.library.model.Borrowed;
 import org.springframework.stereotype.Service;
+import zti.library.model.User;
 import zti.library.repository.BorrowedRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +33,11 @@ public class BorrowedService {
         return borrowedRepository.findById(id).orElseThrow(() -> new BorrowedNotFoundException(id));
     }
 
+    public List<Borrowed> getBorrowedByUser(User user){
+//        return borrowedRepository.findByUser(user).orElseThrow(() -> new BorrowedNotFoundException(userId));
+        return StreamSupport.stream(borrowedRepository.findByUser(user).spliterator(),false).collect(Collectors.toList());
+    }
+
     public Borrowed deleteBorrowed(Long id) {
         Borrowed borrowed = getBorrowed(id);
         borrowedRepository.delete(borrowed);
@@ -41,8 +47,8 @@ public class BorrowedService {
     @Transactional
     public Borrowed editBorrowed(Long id, Borrowed borrowed){
         Borrowed borrowedToEdit = getBorrowed(id);
-        borrowedToEdit.setBook(borrowed.getBook());
-        borrowedToEdit.setUser(borrowed.getUser());
+//        borrowedToEdit.setBook(borrowed.getBook());
+//        borrowedToEdit.setUser(borrowed.getUser());
         borrowedToEdit.setDueDate(borrowed.getDueDate());
         borrowedToEdit.setStartDate(borrowed.getStartDate());
         borrowedToEdit.setReturned(borrowed.getReturned());

@@ -61,8 +61,8 @@
 
         <div v-if="userInfo.roles[0].name == 'ROLE_ADMIN'">
           <b-navbar-nav>
-            <b-nav-item href="#">Wypożycz książkę</b-nav-item>
-            <b-nav-item href="#">Zwróć książkę</b-nav-item>
+            <b-nav-item href="/borrowBook">Wypożycz książkę</b-nav-item>
+            <b-nav-item href="/returnBook">Zwróć książkę</b-nav-item>
 
             <b-nav-item-dropdown text="Zarządzaj" right>
               <b-dropdown-item href="/addAuthor">Zarządzaj autorami</b-dropdown-item>

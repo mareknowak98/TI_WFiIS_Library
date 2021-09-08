@@ -15,7 +15,7 @@ public class Borrowed {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="book_id")
     private Book book; //Item
 
@@ -32,6 +32,7 @@ public class Borrowed {
 
     public static Borrowed from(BorrowedDto borrowedDto){
         Borrowed borrowed = new Borrowed();
+//        borrowed.setBook(borrowedDto.getBook());
         borrowed.setStartDate(borrowedDto.getStartDate());
         borrowed.setDueDate(borrowedDto.getDueDate());
         borrowed.setReturned(borrowedDto.getReturned());

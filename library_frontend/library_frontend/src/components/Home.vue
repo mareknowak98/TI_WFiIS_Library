@@ -11,7 +11,7 @@
             <b-row no-gutters>
               <tr>
                 <td width="300px">
-                  <b-card-img src="https://lh3.googleusercontent.com/proxy/swjeISxuNV9nRi4WfIkTuL-gy2pK-_5R5WRRWtDBm6XjDp6-C9NCc9Xp_nQUrBbabKT9OdWhmCjKRC3HUhFughTMgZaQJ7I" fluid alt="Responsive image" style="max-width: 240px"></b-card-img>
+                  <b-card-img :src="require('../../static/single_book.jpeg')" fluid alt="Responsive image" style="max-width: 240px"></b-card-img>
               </td>
               </tr>
               <b-col>
@@ -24,6 +24,9 @@
                       <td id="mytext" v-html="'<strong>Pages: </strong>' + book.pages"></td>
                     </div>
                     <div id="entity-list" style="text-align: left;">
+                      <td id="mytext" v-html="'<strong>Description: </strong>' + book.description"></td>
+                    </div>
+                    <!-- <div id="entity-list" style="text-align: left;">
                       <strong>Categories: </strong>
                       <template v-for="category in book.categories" style="white-space: nowrap;">
                         {{category.category}},
@@ -34,7 +37,7 @@
                       <template v-for="author in book.authors" style="white-space: nowrap;">
                         {{author.author}},
                       </template>
-                    </div>
+                    </div> -->
                   </b-card-text>
 
                 </b-card-body>
