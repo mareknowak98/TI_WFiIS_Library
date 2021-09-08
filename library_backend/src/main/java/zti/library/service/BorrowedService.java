@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import zti.library.exception.BorrowedNotFoundException;
 import zti.library.model.Borrowed;
 import org.springframework.stereotype.Service;
+import zti.library.model.User;
 import zti.library.repository.BorrowedRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +31,11 @@ public class BorrowedService {
 
     public Borrowed getBorrowed(Long id){
         return borrowedRepository.findById(id).orElseThrow(() -> new BorrowedNotFoundException(id));
+    }
+
+    public List<Borrowed> getBorrowedByUser(User user){
+//        return borrowedRepository.findByUser(user).orElseThrow(() -> new BorrowedNotFoundException(userId));
+        return StreamSupport.stream(borrowedRepository.findByUser(user).spliterator(),false).collect(Collectors.toList());
     }
 
     public Borrowed deleteBorrowed(Long id) {

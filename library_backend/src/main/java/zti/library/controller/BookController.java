@@ -28,6 +28,7 @@ public class BookController {
     private final BookService bookService;
     private final AuthorService authorService;
     private final CategoryService categoryService;
+
     @Autowired
     public BookController(BookService bookService, AuthorService authorService,CategoryService categoryService){
         this.authorService = authorService;
