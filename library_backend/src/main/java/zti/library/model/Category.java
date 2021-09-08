@@ -16,7 +16,7 @@ public class Category {
     private Long id;
     private String category;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "books_category",
             joinColumns = @JoinColumn(name = "category_id"),

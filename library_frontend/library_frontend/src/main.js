@@ -6,10 +6,11 @@ import VueRouter from 'vue-router';
 import Home from './components/Home.vue';
 import Register from './components/Register.vue';
 import EnlargeableImage from '@diracleo/vue-enlargeable-image';
-import addBook from './components/AddBook.vue'
+import addBook from './components/AddBook.vue';
 import DetailedBook from './components/DetailedBook.vue';
-import addCategory from './components/AddCategory.vue'
-import addAuthor from './components/AddAuthor.vue'
+import addCategory from './components/AddCategory.vue';
+import addAuthor from './components/AddAuthor.vue';
+import borrowBook from './components/BorrowBook.vue';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -50,6 +51,11 @@ const routes = [{
         path: "/addAuthor",
         name: "addAuthor",
         component: addAuthor
+    },
+    {
+        path: "/borrowBook",
+        name: "borrowBook",
+        component: borrowBook
     },
     {
         path: "/book/:bookId",

@@ -11,7 +11,7 @@
             <b-row no-gutters>
               <tr>
                 <td width="300px">
-                  <b-card-img src="https://lh3.googleusercontent.com/proxy/swjeISxuNV9nRi4WfIkTuL-gy2pK-_5R5WRRWtDBm6XjDp6-C9NCc9Xp_nQUrBbabKT9OdWhmCjKRC3HUhFughTMgZaQJ7I" fluid alt="Responsive image" style="max-width: 240px"></b-card-img>
+                  <b-card-img :src="require('../../static/single_book.jpeg')" fluid alt="Responsive image" style="max-width: 240px"></b-card-img>
               </td>
               </tr>
               <b-col>

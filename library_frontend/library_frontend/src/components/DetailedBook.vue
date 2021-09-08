@@ -5,7 +5,7 @@
     <b-container class="bv-example-row">
       <b-row>
         <b-col sm="4">
-          <enlargeable-image src="https://lh3.googleusercontent.com/proxy/swjeISxuNV9nRi4WfIkTuL-gy2pK-_5R5WRRWtDBm6XjDp6-C9NCc9Xp_nQUrBbabKT9OdWhmCjKRC3HUhFughTMgZaQJ7I" src_large="https://lh3.googleusercontent.com/proxy/swjeISxuNV9nRi4WfIkTuL-gy2pK-_5R5WRRWtDBm6XjDp6-C9NCc9Xp_nQUrBbabKT9OdWhmCjKRC3HUhFughTMgZaQJ7I"/>
+          <enlargeable-image :src="require('../../static/single_book.jpeg')" :src_large="require('../../static/single_book.jpeg')"/>
         </b-col>
         <b-col sm="8" style="text-align: left;">
 
