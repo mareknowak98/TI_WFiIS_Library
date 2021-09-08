@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import zti.library.model.Role;
 import zti.library.model.User;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.Data;
 
@@ -27,12 +29,15 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String name, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    private Set<Role> roles;
+
+    public UserPrincipal(Long id, String name, String email, String password, Collection<? extends GrantedAuthority> authorities, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.roles = roles;
     }
 
     public static UserPrincipal create(User user) {
@@ -45,7 +50,8 @@ public class UserPrincipal implements UserDetails {
                 user.getName(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                authorities,
+                user.getRoles()
         );
     }
 

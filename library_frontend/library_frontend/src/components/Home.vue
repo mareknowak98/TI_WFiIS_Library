@@ -2,8 +2,49 @@
   <div class="container">
     <navbar></navbar>
     <b-jumbotron class="jumbotron jumbotron-home">
-      <h2>Books</h2>
-      {{books}}
+      <div class="">
+
+        <b-list-group v-for="(book) in books" :key="book.id">
+        <b-list-group-item :to="'/book/' + book.id">
+
+           <b-card no-body class="overflow-hidden">
+            <b-row no-gutters>
+              <tr>
+                <td width="300px">
+                  <b-card-img src="https://lh3.googleusercontent.com/proxy/swjeISxuNV9nRi4WfIkTuL-gy2pK-_5R5WRRWtDBm6XjDp6-C9NCc9Xp_nQUrBbabKT9OdWhmCjKRC3HUhFughTMgZaQJ7I" fluid alt="Responsive image" style="max-width: 240px"></b-card-img>
+              </td>
+              </tr>
+              <b-col>
+                <b-card-body :title="book.name">
+                  <b-card-text>
+                    <div id="entity-list">
+                      <td id="mytext" v-html="'<strong>Publisher: </strong>' + book.publisher"></td>
+                    </div>
+                    <div id="entity-list">
+                      <td id="mytext" v-html="'<strong>Pages: </strong>' + book.pages"></td>
+                    </div>
+                    <div id="entity-list" style="text-align: left;">
+                      <strong>Categories: </strong>
+                      <template v-for="category in book.categories" style="white-space: nowrap;">
+                        {{category.category}},
+                      </template>
+                    </div>
+                    <div id="entity-list" style="text-align: left;">
+                      <strong>Authors: </strong>
+                      <template v-for="author in book.authors" style="white-space: nowrap;">
+                        {{author.author}},
+                      </template>
+                    </div>
+                  </b-card-text>
+
+                </b-card-body>
+              </b-col>
+            </b-row>
+          </b-card>
+        </b-list-group-item>
+      </b-list-group>
+      </div>
+
        <Footer></Footer>
 
      </b-jumbotron>
@@ -53,29 +94,11 @@ export default {
 };
 </script>
 
+
+
 <style scoped>
 @import '../../styles/style.css';
 
-.custom {
-    width: 73px !important;
-}
-.custom2 {
-    width: 219px!important;
-}
-
-
-.myform1{
-  padding: 0%;
-  margin-left: 0%;
-  margin-right: 0.3%;
-  text-align: left;
-}
-.myform2{
-  padding: 0%;
-  margin: 0%;
-  text-align: left;
-
-}
 @media (min-width: 100px) {
     .container{
         max-width: 1400px;

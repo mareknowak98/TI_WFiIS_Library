@@ -16,6 +16,11 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String publisher;
+    private String isbn;
+    private int pages;
+    private String description;
+
 
     @JsonIgnore
     @ManyToMany(mappedBy = "booksWritten", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -37,12 +42,30 @@ public class Book {
         Book book = new Book();
         book.setName(bookDto.getName());
         book.setAuthors(bookDto.getAuthors());
+        book.setPublisher(bookDto.getPublisher());
+        book.setIsbn(bookDto.getIsbn());
+        book.setPages(bookDto.getPages());
+        book.setDescription(bookDto.getDescription());
         return book;
     }
 
-    public void addAuthor(Author author){
-        this.authors.add(author);
+    public Book(){
+
     }
+
+    public Book(String name){
+        this.name = name;
+    }
+
+    public Book(String name, String publisher, String isbn, int pages, String description){
+        this.name = name;
+        this.publisher = publisher;
+        this.isbn = isbn;
+        this.pages = pages;
+        this.description = description;
+    }
+
+    public void addAuthor(Author author){ this.authors.add(author); }
     public void removeAuthor(Author author){
         this.authors.remove(author);
     }

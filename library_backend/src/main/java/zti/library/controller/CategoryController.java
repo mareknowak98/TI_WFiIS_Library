@@ -27,6 +27,7 @@ public class CategoryController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoryDto> addCategory(@RequestBody final CategoryDto categoryDto){
         Category category = categoryService.addCategory(Category.from(categoryDto));
         return new ResponseEntity<>(CategoryDto.from(category), HttpStatus.OK);

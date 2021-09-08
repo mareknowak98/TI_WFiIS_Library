@@ -5,14 +5,24 @@ import axios from "axios";
 import VueRouter from 'vue-router';
 import Home from './components/Home.vue';
 import Register from './components/Register.vue';
+import EnlargeableImage from '@diracleo/vue-enlargeable-image';
 import addBook from './components/AddBook.vue'
+import DetailedBook from './components/DetailedBook.vue';
+import addCategory from './components/AddCategory.vue'
+import addAuthor from './components/AddAuthor.vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 
 // window.axios = require('axios');
-import { BootstrapVue } from 'bootstrap-vue'
+
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 Vue.use(VueRouter);
 Vue.use(BootstrapVue)
+Vue.use(EnlargeableImage)
+Vue.use(BootstrapVueIcons)
+Vue.component('enlargeable-image', EnlargeableImage)
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 
@@ -32,6 +42,21 @@ const routes = [{
         component: addBook
     },
     {
+        path: "/addCategory",
+        name: "addCategory",
+        component: addCategory
+    },
+    {
+        path: "/addAuthor",
+        name: "addAuthor",
+        component: addAuthor
+    },
+    {
+        path: "/book/:bookId",
+        name: "bookDetailed",
+        component: DetailedBook
+    },
+    {
         path: '/*',
         redirect: { name: 'home' }
     },
@@ -40,7 +65,15 @@ const routes = [{
 
 Vue.mixin({
     methods: {
-
+        $goToAnotherPage: function(page) {
+            this.$router.push(page);
+        },
+        $goToMainPage: function() {
+            if (this.$route.path !== "/") this.$router.replace("/")
+        },
+        $getToken: function() {
+            return localStorage.getItem("user-token");
+        }
     }
 })
 
@@ -51,7 +84,7 @@ const router = new VueRouter({
 
 Vue.config.productionTip = false;
 
-const DEFAULT_TITLE = 'sth';
+const DEFAULT_TITLE = 'Library App';
 
 router.afterEach((to) => {
     Vue.nextTick(() => {

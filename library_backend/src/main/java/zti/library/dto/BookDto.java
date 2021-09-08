@@ -12,6 +12,10 @@ import java.util.List;
 public class BookDto {
     private Long id;
     private String name;
+    private String publisher;
+    private String isbn;
+    private int pages;
+    private String description;
     private List<Author> authors = new ArrayList<>();
     private List<Category> categories = new ArrayList<>();
 
@@ -21,6 +25,10 @@ public class BookDto {
         bookDto.setAuthors(book.getAuthors());
         bookDto.setName(book.getName());
         bookDto.setCategories(book.getCategories());
+        bookDto.setPublisher(book.getPublisher());
+        bookDto.setIsbn(book.getIsbn());
+        bookDto.setPages(book.getPages());
+        bookDto.setDescription(book.getDescription());
         return bookDto;
     }
 

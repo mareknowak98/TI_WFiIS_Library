@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import zti.library.dto.AuthorDto;
 import zti.library.dto.BookDto;
+import zti.library.dto.CategoryDto;
 import zti.library.model.Author;
 import zti.library.model.Book;
 import zti.library.service.BookService;
@@ -51,6 +52,7 @@ public class BookController {
 
     @DeleteMapping(value = "{id}")
     public ResponseEntity<BookDto> deleteBook(@PathVariable final Long id){
+        log.info("Deleting book with id [id: {}]", id);
         Book book = bookService.deleteBook(id);
         return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
     }
@@ -67,6 +69,15 @@ public class BookController {
         return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
     }
 
+    @PostMapping(value = "{bookId}/addManyAuthors")
+    public ResponseEntity<BookDto> addAuthorsToBook(@PathVariable final Long bookId, @RequestBody final List<AuthorDto> authorDtos){
+        Book book = new Book();
+        for (AuthorDto authorDto : authorDtos) {
+            book = bookService.addAuthorToBook(bookId, authorDto.getId());
+        }
+        return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "{bookId}/authors/{authorId}/remove")
     public ResponseEntity<BookDto> removeAuthorFromBook(@PathVariable final Long bookId, @PathVariable final Long authorId){
         Book book = bookService.removeAuthorFromBook(bookId, authorId);
@@ -76,6 +87,15 @@ public class BookController {
     @PostMapping(value = "{bookId}/categories/{categoryId}/add")
     public ResponseEntity<BookDto> addCategoryToBook(@PathVariable final Long bookId, @PathVariable final Long categoryId){
         Book book = bookService.addCategoryToBook(bookId, categoryId);
+        return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "{bookId}/addManyCategories")
+    public ResponseEntity<BookDto> addCategoriesToBook(@PathVariable final Long bookId, @RequestBody final List<CategoryDto> categoryDtos){
+        Book book = new Book();
+        for (CategoryDto categoryDto : categoryDtos) {
+            book = bookService.addCategoryToBook(bookId, categoryDto.getId());
+        }
         return new ResponseEntity<>(BookDto.from(book), HttpStatus.OK);
     }
 
