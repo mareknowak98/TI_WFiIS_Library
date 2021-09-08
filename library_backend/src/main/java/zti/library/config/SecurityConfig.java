@@ -35,7 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/authors/**",
             "/api/users/**",
             "/categories/**",
-            "/borrow/**"
+            "/borrow/**",
+            "/reserve/**"
     };
 
     private CustomUserDetailsService customUserDetailsService;

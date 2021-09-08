@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import zti.library.exception.ReservationNotFoundException;
 import zti.library.model.Borrowed;
 import zti.library.model.Reservation;
+import zti.library.model.User;
 import zti.library.repository.ReservationRepository;
 
 import javax.transaction.Transactional;
@@ -33,6 +34,11 @@ public class ReservationService {
         return reservationRepository.findById(id).orElseThrow(() -> new ReservationNotFoundException(id));
     }
 
+    public List<Reservation> getReservationByUser(User user){
+//        return borrowedRepository.findByUser(user).orElseThrow(() -> new BorrowedNotFoundException(userId));
+        return StreamSupport.stream(reservationRepository.findByUser(user).spliterator(),false).collect(Collectors.toList());
+    }
+
     public Reservation deleteReservation(Long id) {
         Reservation reservation = getReservation(id);
         reservationRepository.delete(reservation);
@@ -42,8 +48,8 @@ public class ReservationService {
     @Transactional
     public Reservation editReservation(Long id, Borrowed borrowed){
         Reservation reservationToEdit = getReservation(id);
-        reservationToEdit.setBook(borrowed.getBook());
-        reservationToEdit.setUser(borrowed.getUser());
+//        reservationToEdit.setBook(borrowed.getBook());
+//        reservationToEdit.setUser(borrowed.getUser());
         reservationToEdit.setDueDate(borrowed.getDueDate());
         return reservationToEdit;
     }
