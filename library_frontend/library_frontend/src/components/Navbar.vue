@@ -150,7 +150,6 @@ import axios from 'axios';
       },
 
       getUserInfo(){
-        console.log(localStorage.getItem('user-token'))
         if(localStorage.getItem('user-token') != null){
           let config = {
               headers: {
