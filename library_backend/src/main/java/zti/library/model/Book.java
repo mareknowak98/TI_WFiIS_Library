@@ -41,7 +41,7 @@ public class Book {
     public static Book from(BookDto bookDto){
         Book book = new Book();
         book.setName(bookDto.getName());
-        book.setAuthors(bookDto.getAuthors());
+//        book.setAuthors(bookDto.getAuthors());
         book.setPublisher(bookDto.getPublisher());
         book.setIsbn(bookDto.getIsbn());
         book.setPages(bookDto.getPages());

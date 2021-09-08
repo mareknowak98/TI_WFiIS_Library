@@ -22,7 +22,7 @@
           <h1>{{book.name}}</h1>
           <p>
             <strong>Autorzy: </strong>
-              <template v-for="author in book.authors" style="white-space: nowrap;">
+              <template v-for="author in authors" style="white-space: nowrap;">
                 {{author.author}},
               </template>
           </p>
@@ -34,7 +34,7 @@
           </p>
           <p>
             <strong>Kategoria: </strong>
-              <template v-for="category in book.categories" style="white-space: nowrap;">
+              <template v-for="category in categories" style="white-space: nowrap;">
                 {{category.category}},
               </template>
           </p>
@@ -72,7 +72,9 @@ import axios from 'axios';
       return {
         bookId: '',
         book:{},
-        userInfo: null
+        userInfo: null,
+        authors: [],
+        categories: [],
       }
     },
 
@@ -96,9 +98,27 @@ import axios from 'axios';
           }
           axios.get('http://localhost:5000/books/' + i, config)
           .then(res => (this.book = res.data))
+          .then(resp => (console.log(resp) ,
+            axios({
+                url: 'http://localhost:5000/books/' + i + '/categories',
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json', 
+                    },
+                data: this.categories
+            }).then (resp => (this.categories = resp.data))))
+          .then(resp => (console.log(resp) ,
+            axios({
+                url: 'http://localhost:5000/books/' + i + '/authors',
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/json', 
+                    },
+                data: this.authors
+            }).then (resp => (this.authors = resp.data))))
           .catch(err => {
           console.log(err);
-          })     
+          }) 
         },
 
         getUserInfo(){

@@ -24,6 +24,9 @@
                       <td id="mytext" v-html="'<strong>Pages: </strong>' + book.pages"></td>
                     </div>
                     <div id="entity-list" style="text-align: left;">
+                      <td id="mytext" v-html="'<strong>Description: </strong>' + book.description"></td>
+                    </div>
+                    <!-- <div id="entity-list" style="text-align: left;">
                       <strong>Categories: </strong>
                       <template v-for="category in book.categories" style="white-space: nowrap;">
                         {{category.category}},
@@ -34,7 +37,7 @@
                       <template v-for="author in book.authors" style="white-space: nowrap;">
                         {{author.author}},
                       </template>
-                    </div>
+                    </div> -->
                   </b-card-text>
 
                 </b-card-body>

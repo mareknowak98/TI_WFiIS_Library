@@ -11,6 +11,7 @@ import DetailedBook from './components/DetailedBook.vue';
 import addCategory from './components/AddCategory.vue';
 import addAuthor from './components/AddAuthor.vue';
 import borrowBook from './components/BorrowBook.vue';
+import returnBook from './components/ReturnBook.vue';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -56,6 +57,11 @@ const routes = [{
         path: "/borrowBook",
         name: "borrowBook",
         component: borrowBook
+    },
+    {
+        path: "/returnBook",
+        name: "returnBook",
+        component: returnBook
     },
     {
         path: "/book/:bookId",
