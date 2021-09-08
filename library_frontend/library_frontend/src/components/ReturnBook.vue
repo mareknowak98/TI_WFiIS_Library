@@ -9,9 +9,29 @@
         <template slot="singleLabel" slot-scope="{ option }">Uzytkownik: <strong>{{ option.email }}</strong></template>
     </multiselect>
 
+    <b-button block type="submit" v-on:click="getBorrowedByUser()" variant="secondary">Wyszukaj książki wypożyczone przez użytkownika</b-button>
 
-    <b-button block type="submit" v-on:click="borrowBook()" variant="secondary">Oddaj</b-button>
+    <b-list-group v-for="(i) in borrowed" :key="i.id">
+      <div v-if="i.returned == false">
 
+        <ul class="list-unstyled">
+        <b-media tag="li">
+          <template #aside>
+            <b-img :src="require('../../static/single_book.jpeg')" blank-color="#abc" width="64" alt="placeholder"></b-img>
+          </template>
+          <h5 class="mt-0 mb-1" style="text-align: left;">{{i.book.name}}</h5>
+          <b-row>
+            <b-col>Wypożyczono: {{i.startDate}}</b-col>
+            <b-col>
+              <b-button type="submit" v-on:click="returnBook(i)" variant="secondary">Zwróć</b-button>
+            </b-col>
+          </b-row>
+          <hr>
+        </b-media>
+        </ul>
+      
+      </div>
+    </b-list-group>
 
     <Footer></Footer>
   </b-jumbotron>
@@ -28,7 +48,7 @@ import Multiselect from 'vue-multiselect'
 
 import axios from 'axios';
   export default {
-    name: "borrowBook",
+    name: "returnBook",
     components:{
         Navbar,
         Footer,
@@ -39,7 +59,7 @@ import axios from 'axios';
     data() {
       return {
         users: [],
-        books: [],
+        borrowed: [],
         selected_book: null,
         selected_user: null,
         today: null,
@@ -75,6 +95,38 @@ import axios from 'axios';
             console.log(err);
             })
         },
+
+        getBorrowedByUser(){
+          let config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+                }  
+            }
+            axios.get('http://localhost:5000/borrow/getUserBorrowed/' + this.selected_user.id , config)
+            .then(res => (this.borrowed = res.data))
+            .catch(err => {
+            console.log(err);
+            })
+        },
+        returnBook(i){
+          console.log(i);
+          let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('user-token')
+            }
+            }
+            axios.put('http://localhost:5000/api/users/addBorrowedToUser/return',{
+                id: i.id,
+                startDate: i.startDate,
+                returned: true,
+                dueDate: this.today,
+            }, config)
+            .catch(err => {
+            console.log(err);
+            })
+        }
 
 
     }

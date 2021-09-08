@@ -47,8 +47,8 @@ public class BorrowedService {
     @Transactional
     public Borrowed editBorrowed(Long id, Borrowed borrowed){
         Borrowed borrowedToEdit = getBorrowed(id);
-        borrowedToEdit.setBook(borrowed.getBook());
-        borrowedToEdit.setUser(borrowed.getUser());
+//        borrowedToEdit.setBook(borrowed.getBook());
+//        borrowedToEdit.setUser(borrowed.getUser());
         borrowedToEdit.setDueDate(borrowed.getDueDate());
         borrowedToEdit.setStartDate(borrowed.getStartDate());
         borrowedToEdit.setReturned(borrowed.getReturned());
