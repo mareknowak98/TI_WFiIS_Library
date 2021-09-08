@@ -6,15 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import zti.library.dto.*;
-import zti.library.model.Book;
-import zti.library.model.Borrowed;
-import zti.library.model.Category;
-import zti.library.model.User;
+import zti.library.model.*;
 import zti.library.repository.BorrowedRepository;
 import zti.library.security.CurrentUser;
 import zti.library.security.UserPrincipal;
 import zti.library.service.BookService;
 import zti.library.service.BorrowedService;
+import zti.library.service.ReservationService;
 import zti.library.service.UserService;
 
 import javax.transaction.Transactional;
@@ -28,12 +26,14 @@ public class UserController {
     private UserService userService;
     private BookService bookService;
     private BorrowedService borrowedService;
+    private ReservationService reservationService;
 
     @Autowired
-    public UserController(UserService userService, BookService bookService, BorrowedService borrowedService) {
+    public UserController(UserService userService, BookService bookService, BorrowedService borrowedService, ReservationService reservationService) {
         this.borrowedService = borrowedService;
         this.userService = userService;
         this.bookService = bookService;
+        this.reservationService = reservationService;
     }
 
     @GetMapping("all") //TODO delete it
@@ -73,6 +73,14 @@ public class UserController {
         Borrowed borrowedToEdit = borrowedService.editBorrowed(borrowedDto.getId(), Borrowed.from(borrowedDto));
         return new ResponseEntity<>(BorrowedDto.from(borrowedToEdit), HttpStatus.OK);
     }
+
+//    @PostMapping("addReservedToUser/{userId}/{bookId}/add")
+//    public ResponseEntity<ReservationDto> addReservedToUser(@PathVariable final Long userId, @PathVariable final Long bookId, @RequestBody final ReservationDto reservationDto){
+//        Reservation reservation = reservationService.addReservation(Reservation.from(reservationDto));
+//        userService.addReservationToUser(userId, reservation.getId());
+//        bookService.addReservationToBook(bookId, reservation.getId());
+//        return new ResponseEntity<>(ReservationDto.from(reservation), HttpStatus.OK);
+//    }
 
 
 }

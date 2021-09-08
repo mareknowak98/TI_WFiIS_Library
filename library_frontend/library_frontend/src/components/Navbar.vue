@@ -49,12 +49,11 @@
 
         <div v-if="userInfo.roles[0].name == 'ROLE_USER'">
           <b-navbar-nav>
-            <b-nav-item href="#">Zarezerwuj książkę</b-nav-item>
+            <b-nav-item href="/reserveBook">Zarezerwuj książkę</b-nav-item>
 
             <b-nav-item-dropdown text="Moje konto" right>
-              <b-dropdown-item href="#">Wypożyczone książki</b-dropdown-item>
-              <b-dropdown-item href="#">Zarezerwowane książki</b-dropdown-item>
-              <b-dropdown-item href="#">Oddane ksiażki</b-dropdown-item>
+              <b-dropdown-item href="/borrowedBooks">Wypożyczenia</b-dropdown-item>
+              <b-dropdown-item href="/reservedBooks">Zarezerwowane książki</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </div>

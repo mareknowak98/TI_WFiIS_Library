@@ -12,6 +12,10 @@ import addCategory from './components/AddCategory.vue';
 import addAuthor from './components/AddAuthor.vue';
 import borrowBook from './components/BorrowBook.vue';
 import returnBook from './components/ReturnBook.vue';
+import borrowedBooks from './components/BorrowedBooks.vue';
+import reserveBook from './components/ReserveBook.vue';
+import reservedBooks from './components/ReservedBooks.vue';
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -62,6 +66,21 @@ const routes = [{
         path: "/returnBook",
         name: "returnBook",
         component: returnBook
+    },
+    {
+        path: "/borrowedBooks",
+        name: "borrowedBooks",
+        component: borrowedBooks
+    },
+    {
+        path: "/reserveBook",
+        name: "reserveBook",
+        component: reserveBook
+    },
+    {
+        path: "/reservedBooks",
+        name: "reservedBooks",
+        component: reservedBooks
     },
     {
         path: "/book/:bookId",

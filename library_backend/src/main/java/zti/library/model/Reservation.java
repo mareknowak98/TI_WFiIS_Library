@@ -16,8 +16,8 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="book_reservation_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="book_id")
     private Book book; //Item
 
     @ManyToOne

@@ -18,6 +18,9 @@ import zti.library.service.BorrowedService;
 import zti.library.service.ReservationService;
 import zti.library.service.UserService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/reserve")
 public class ReservationController {
@@ -33,7 +36,7 @@ public class ReservationController {
     }
 
     @PostMapping("addReservation/{bookId}")
-    public ResponseEntity<ReservationDto> addBorrowed(@CurrentUser UserPrincipal currentUser, @PathVariable final Long bookId, @RequestBody final ReservationDto reservationDto){
+    public ResponseEntity<ReservationDto> addReservation(@CurrentUser UserPrincipal currentUser, @PathVariable final Long bookId, @RequestBody final ReservationDto reservationDto){
         Reservation reservation = reservationService.addReservation(Reservation.from(reservationDto));
         Long currentUserId = userService.getCurrentUser(currentUser).getId();
         User user = userService.getUser(currentUserId);
@@ -42,6 +45,27 @@ public class ReservationController {
         bookService.addReservationToBook(bookId, reservation.getId());
 
         return new ResponseEntity<>(ReservationDto.from(reservation), HttpStatus.OK);
+    }
+
+    @DeleteMapping("removeReservation/{reservationId}")
+    public ResponseEntity<ReservationDto> removeReservation(@CurrentUser UserPrincipal currentUser, @PathVariable final Long reservationId){
+        Reservation reservation = reservationService.deleteReservation(reservationId);
+        return new ResponseEntity<>(ReservationDto.from(reservation), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "getUserBorrowed/{userId}")
+    public ResponseEntity<List<ReservationDto>> getReservationsByUser(@PathVariable final Long userId){
+        User user = userService.getUser(userId);
+        List<Reservation> borrowed = reservationService.getReservationByUser(user);
+        return new ResponseEntity<>(borrowed.stream().map(ReservationDto::from).collect(Collectors.toList()), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "getUserBorrowed/me")
+    public ResponseEntity<List<ReservationDto>> getReservationsByMe(@CurrentUser UserPrincipal currentUser){
+        Long currentUserId = userService.getCurrentUser(currentUser).getId();
+        User user = userService.getUser(currentUserId);
+        List<Reservation> borrowed = reservationService.getReservationByUser(user);
+        return new ResponseEntity<>(borrowed.stream().map(ReservationDto::from).collect(Collectors.toList()), HttpStatus.OK);
     }
 
 }
