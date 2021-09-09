@@ -106,11 +106,11 @@ import axios from 'axios';
               'Authorization': 'Bearer ' + localStorage.getItem('user-token')
               }
           }
-          axios.get('http://localhost:5000/api/users/me', config)
+          axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/users/me', config)
           .then(res => (this.userInfo = res.data))
           .then(resp => (console.log(resp) ,
             axios({
-                url: 'http://localhost:5000/borrow/getUserBorrowed/' + this.userInfo.id,
+                url: 'http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/borrow/getUserBorrowed/' + this.userInfo.id,
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json', 

@@ -64,7 +64,7 @@ import axios from 'axios';
             'Content-Type': 'application/json',
             }
         }
-            axios.get('http://localhost:5000/books', config)
+            axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books', config)
             .then(res => (this.books = res.data))
             .catch(err => {
             console.log(err);
@@ -77,7 +77,7 @@ import axios from 'axios';
             'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
         }
-            axios.post('http://localhost:5000/reserve/addReservation/' + this.selected_book.id, { dueDate: this.dueDate }, config)
+            axios.post('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/reserve/addReservation/' + this.selected_book.id, { dueDate: this.dueDate }, config)
             .then(res => (console.log(res.data),this.selected_book = null))
             .catch(err => {
             console.log(err);

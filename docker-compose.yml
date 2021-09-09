@@ -1,27 +1,23 @@
 version: '3.6'
 services:
-  back:
-    build: 
-      context: ./library_backend
-      target:  finalApp
-    image: library-backend
-    container_name: library-backend
-    ports:
-      - 5000:5000
-    networks:
-      - frontback 
+ back:
+  image: mareknowak98/library-backend
+  container_name: library-backend
+  ports:
+   - 5000:5000
+  networks:
+   - frontback
 
-  front:
-    build: ./library_frontend/library_frontend
-    image: library-frontend
-    container_name: library-frontend
-    ports:
-      - 8080:8080
-    depends_on:
-      - back
-    networks: 
-      - frontback     
-  
-networks: 
-  frontback:
-    driver: bridge
+ front:
+  image: mareknowak98/library-frontend
+  container_name: library-frontend
+  ports:
+   - 8080:8080
+  depends_on:
+   - back
+  networks:
+   - frontback
+
+networks:
+ frontback:
+  driver: bridge

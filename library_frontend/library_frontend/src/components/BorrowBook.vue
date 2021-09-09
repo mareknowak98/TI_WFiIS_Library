@@ -75,7 +75,7 @@ import axios from 'axios';
                     'Authorization': 'Bearer ' + localStorage.getItem('user-token')
                 }  
             }
-            axios.get('http://localhost:5000/api/users/all', config)
+            axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/users/all', config)
             .then(res => (this.users = res.data))
             .catch(err => {
             console.log(err);
@@ -88,7 +88,7 @@ import axios from 'axios';
                     'Authorization': 'Bearer ' + localStorage.getItem('user-token')
                 }  
             }
-            axios.get('http://localhost:5000/books', config)
+            axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books', config)
             .then(res => (this.books = res.data))
             .catch(err => {
             console.log(err);
@@ -101,7 +101,7 @@ import axios from 'axios';
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
             }
-            axios.post('http://localhost:5000/api/users/addBorrowedToUser/' + this.selected_user.id + '/' + this.selected_book.id + '/add',{
+            axios.post('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/users/addBorrowedToUser/' + this.selected_user.id + '/' + this.selected_book.id + '/add',{
                 returned: false,
                 startDate: this.today
             }, config)

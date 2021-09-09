@@ -136,7 +136,7 @@ import axios from 'axios';
 
     addBook(){
         axios({
-            url: 'http://localhost:5000/books',
+            url: 'http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books',
             method: 'post',
             headers: {
                 'Content-Type': 'application/json', 
@@ -151,7 +151,7 @@ import axios from 'axios';
             }
         }).then(resp => (this.book = resp.data.id ,
         axios({
-            url: 'http://localhost:5000/books/' + resp.data.id + '/addManyAuthors',
+            url: 'http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books/' + resp.data.id + '/addManyAuthors',
             method: 'post',
             headers: {
                 'Content-Type': 'application/json', 
@@ -161,7 +161,7 @@ import axios from 'axios';
         })))
         .then(resp => (this.book = resp.data.id ,
         axios({
-            url: 'http://localhost:5000/books/' + resp.data.id + '/addManyCategories',
+            url: 'http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books/' + resp.data.id + '/addManyCategories',
             method: 'post',
             headers: {
                 'Content-Type': 'application/json', 
@@ -188,7 +188,7 @@ import axios from 'axios';
             'Content-Type': 'application/json',
           }
         }
-          axios.get('http://localhost:5000/authors', config)
+          axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/authors', config)
           .then(res => (this.authors = res.data))
           .catch(err => {
           console.log(err);
@@ -201,7 +201,7 @@ import axios from 'axios';
             'Content-Type': 'application/json',
           }
         }
-          axios.get('http://localhost:5000/categories', config)
+          axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/categories', config)
           .then(res => (this.categories = res.data))
           .catch(err => {
           console.log(err);

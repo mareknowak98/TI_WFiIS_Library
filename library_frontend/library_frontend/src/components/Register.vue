@@ -84,7 +84,7 @@ import axios from 'axios';
             'Content-Type': 'application/json',
           }
         }
-          axios.post('http://localhost:5000/api/auth/signup',{
+          axios.post('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/auth/signup',{
           name: this.form.name,
           email: this.form.email,
           password: this.form.password,

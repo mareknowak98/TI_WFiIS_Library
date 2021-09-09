@@ -85,7 +85,7 @@ import axios from 'axios';
             'Authorization': 'Bearer ' + localStorage.getItem('user-token')
           }
         }
-          axios.post('http://localhost:5000/categories',{
+          axios.post('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/categories',{
           category: this.form.category,
           }, config)
           .then(this.form.category = '')
@@ -101,7 +101,7 @@ import axios from 'axios';
             'Authorization': 'Bearer ' + localStorage.getItem('user-token')
           }
         }
-          axios.delete('http://localhost:5000/categories/' + this.selected_category.id, config)
+          axios.delete('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/categories/' + this.selected_category.id, config)
           .then(this.selected_category = null, this.getCategories())
           .catch(err => {
           console.log(err);
@@ -114,7 +114,7 @@ import axios from 'axios';
             'Content-Type': 'application/json',
           }
         }
-          axios.get('http://localhost:5000/categories', config)
+          axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/categories', config)
           .then(res => (this.categories = res.data))
           .catch(err => {
           console.log(err);

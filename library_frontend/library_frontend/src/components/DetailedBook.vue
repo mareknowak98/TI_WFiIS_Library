@@ -96,11 +96,11 @@ import axios from 'axios';
               'Content-Type': 'application/json',
               }
           }
-          axios.get('http://localhost:5000/books/' + i, config)
+          axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books/' + i, config)
           .then(res => (this.book = res.data))
           .then(resp => (console.log(resp) ,
             axios({
-                url: 'http://localhost:5000/books/' + i + '/categories',
+                url: 'http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books/' + i + '/categories',
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json', 
@@ -109,7 +109,7 @@ import axios from 'axios';
             }).then (resp => (this.categories = resp.data))))
           .then(resp => (console.log(resp) ,
             axios({
-                url: 'http://localhost:5000/books/' + i + '/authors',
+                url: 'http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books/' + i + '/authors',
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json', 
@@ -129,7 +129,7 @@ import axios from 'axios';
               'Authorization': 'Bearer ' + localStorage.getItem('user-token')
               }
           }
-          axios.get('http://localhost:5000/api/users/me', config)
+          axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/users/me', config)
           .then(res => (this.userInfo = res.data))
           .catch(err => {
           console.log(err);
@@ -144,7 +144,7 @@ import axios from 'axios';
             'Authorization': 'Bearer ' + localStorage.getItem('user-token')
           }
         }
-          axios.delete('http://localhost:5000/books/' + this.book.id, config)
+          axios.delete('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books/' + this.book.id, config)
           .then(this.$goToMainPage())
           .catch(err => {
           console.log(err);

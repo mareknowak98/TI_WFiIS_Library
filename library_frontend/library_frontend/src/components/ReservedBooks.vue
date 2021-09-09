@@ -76,7 +76,7 @@ import axios from 'axios';
               'Authorization': 'Bearer ' + localStorage.getItem('user-token')
               }
           }
-          axios.get('http://localhost:5000/reserve/getUserBorrowed/me', config)
+          axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/reserve/getUserBorrowed/me', config)
           .then(res => (this.reserved = res.data))
           .catch(err => {
             console.log(err);
@@ -90,7 +90,7 @@ import axios from 'axios';
               'Authorization': 'Bearer ' + localStorage.getItem('user-token')
               }
           }
-          axios.delete('http://localhost:5000/reserve/removeReservation/' + i.id, config)
+          axios.delete('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/reserve/removeReservation/' + i.id, config)
           .then(res => (this.deleted = res.data))
           .then(res => (console.log(res), this.getBorrowedByUser()))
           .catch(err => {

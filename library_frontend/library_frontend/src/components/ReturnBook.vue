@@ -89,7 +89,7 @@ import axios from 'axios';
                     'Authorization': 'Bearer ' + localStorage.getItem('user-token')
                 }  
             }
-            axios.get('http://localhost:5000/api/users/all', config)
+            axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/users/all', config)
             .then(res => (this.users = res.data))
             .catch(err => {
             console.log(err);
@@ -103,7 +103,7 @@ import axios from 'axios';
                     'Authorization': 'Bearer ' + localStorage.getItem('user-token')
                 }  
             }
-            axios.get('http://localhost:5000/borrow/getUserBorrowed/' + this.selected_user.id , config)
+            axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/borrow/getUserBorrowed/' + this.selected_user.id , config)
             .then(res => (this.borrowed = res.data))
             .catch(err => {
             console.log(err);
@@ -117,7 +117,7 @@ import axios from 'axios';
                 'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
             }
-            axios.put('http://localhost:5000/api/users/addBorrowedToUser/return',{
+            axios.put('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/users/addBorrowedToUser/return',{
                 id: i.id,
                 startDate: i.startDate,
                 returned: true,

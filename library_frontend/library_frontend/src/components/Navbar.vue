@@ -117,7 +117,7 @@ import axios from 'axios';
     },
     methods: {
         login(){
-        axios.post('http://localhost:5000/api/auth/signin',{
+        axios.post('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/auth/signin',{
           email: this.email,
           password: this.password,
         })
@@ -157,7 +157,7 @@ import axios from 'axios';
               'Authorization': 'Bearer ' + localStorage.getItem('user-token')
               }
           }
-          axios.get('http://localhost:5000/api/users/me', config)
+          axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/users/me', config)
           .then(res => (this.userInfo = res.data))
           .catch(err => {
           console.log(err);
@@ -173,7 +173,7 @@ import axios from 'axios';
             'Authorization': 'Bearer ' + localStorage.getItem('user-token')
             }
         }
-        axios.get('http://localhost:5000/api/users/me', config)
+        axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/api/users/me', config)
         .then(res => (this.userInfo = res.data))
         .catch(err => {
         console.log(err);

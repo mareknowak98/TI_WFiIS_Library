@@ -75,7 +75,7 @@ export default {
           'Content-Type': 'application/json',
         }
       }
-        axios.get('http://localhost:5000/books', config)
+        axios.get('http://ec2-3-67-44-255.eu-central-1.compute.amazonaws.com:5000/books', config)
         .then(res => (this.books = res.data))
         .catch(err => {
         console.log(err);
